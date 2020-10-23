@@ -1,4 +1,4 @@
-# symartsoft
+# Symartsoft
 Multipurpose web application hosted on Azure using container instances
 
 * ASP.Net 5 Web API backend
