@@ -34,7 +34,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
       -
-        name: Build with test and push
+        name: Build with test
+        if: ${{ github.ref != 'refs/heads/main' }}
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -43,3 +44,14 @@ jobs:
           tags: artursymanovic/symartsoft:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
+      -
+        name: Build with test and push
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: artursymanovic/symartsoft:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache          
