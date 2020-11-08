@@ -73,5 +73,6 @@ COPY --from=publish /app/API/out ./
 # expose port 80 as our application will be listening on this port (dictated by microsoft asp runtime container and can be overriden using ENV ASPNETCORE_URLS http://+:80 )
 EXPOSE 80
 
+
 # run the web api when the docker image is started
-ENTRYPOINT ["dotnet", "MyAPI.dll"]
+ENTRYPOINT ["dotnet", "API.dll"]

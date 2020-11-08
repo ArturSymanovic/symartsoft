@@ -36,23 +36,23 @@ namespace API.Tests
             };
         }
 
-        [Fact]
-        public void Get_TestingMoq()
-        {
-            using (var mock = AutoMock.GetLoose())
-            {
-            //Arrange
-            mock.Mock<ITestDependancy>()
-                .Setup(x => x.GetData<string>("test connection string"))
-                .Returns(GetListOfstrings());
-            var controller = mock.Create<WeatherForecastController>();
+        // [Fact]
+        // public void Get_TestingMoq()
+        // {
+        //     using (var mock = AutoMock.GetLoose())
+        //     {
+        //     //Arrange
+        //     mock.Mock<ITestDependancy>()
+        //         .Setup(x => x.GetData<string>("test connection string"))
+        //         .Returns(GetListOfstrings());
+        //     var controller = mock.Create<WeatherForecastController>();
 
-            //Act
-            var result = controller.GetArray();
+        //     //Act
+        //     var result = controller.GetArray();
 
-            //Assert
-            Assert.Equal<string>(GetListOfstrings(), result);
-            }
-        }
+        //     //Assert
+        //     Assert.Equal<string>(GetListOfstrings(), result);
+        //     }
+        // }
     }
 }

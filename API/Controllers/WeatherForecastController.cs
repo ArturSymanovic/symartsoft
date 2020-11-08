@@ -13,11 +13,11 @@ namespace API.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-        private readonly ITestDependancy _testDependancy;
+        //private readonly ITestDependancy _testDependancy;
 
-        public WeatherForecastController(ITestDependancy testDependancy)
+        public WeatherForecastController()
         {
-            this._testDependancy = testDependancy;
+            //this._testDependancy = testDependancy;
         }
 
         [HttpGet]
@@ -33,11 +33,10 @@ namespace API.Controllers
             .ToArray();
         }
 
-        [HttpGet]
-        public List<string> GetArray()
-        {
-            return _testDependancy.GetData<string>("test connection string");
-            //return new List<string> {"adfgdfg", "asdgg"};
-        }
+        // public List<string> GetArray()
+        // {
+        //     return _testDependancy.GetData<string>("test connection string");
+        //     //return new List<string> {"adfgdfg", "asdgg"};
+        // }
     }
 }
