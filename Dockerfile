@@ -67,12 +67,31 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app
 
+# install nginx
+RUN apt-get update
+RUN apt-get install -y nginx
+
 # copy over the files produced when publishing the service
 COPY --from=publish /app/API/out ./
 
-# expose port 80 as our application will be listening on this port (dictated by microsoft asp runtime container and can be overriden using ENV ASPNETCORE_URLS http://+:80 )
+# copy and make executable startup bash script
+COPY ./startup.sh .
+RUN chmod 755 /app/startup.sh
+
+# replace default nginx configuration file with our custom one
+RUN rm /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx
+
+# expose port 80 for http (and 443 for https at a later stage) - will be used by nginx
 EXPOSE 80
+#EXPOSE 443
 
+# override environment variable so that our application listen to port 5000
+ENV ASPNETCORE_URLS http://+:5000
 
-# run the web api when the docker image is started
-ENTRYPOINT ["dotnet", "API.dll"]
+# run the startup script
+CMD ["sh", "/app/startup.sh"]
+
+# docker build . -t production:latest
+# docker run -p 80:80 --rm --name production -it production:latest
+# docker ps -q --filter ancestor="imagename" | xargs -r docker stop
