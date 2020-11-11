@@ -55,6 +55,23 @@ jobs:
           tags: artursymanovic/symartsoft:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache          
+    
+  CD:
+    needs: [CI]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az container restart --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.CONTAINER_NAME }}
   
   Update_Release_Draft:
     if: ${{ github.ref == 'refs/heads/main' }}
