@@ -89,6 +89,16 @@ EXPOSE 80
 # override environment variable so that our application listen to port 5000
 ENV ASPNETCORE_URLS http://+:5000
 
+# install az cli
+RUN apt install -y curl
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+#RUN apt-get update
+#RUN apt-get install -y ca-certificates curl apt-transport-https lsb-release gnupg
+#RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+#RUN AZ_REPO=$(lsb_release -cs) echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list
+#RUN apt-get update
+#RUN apt-get install -y azure-cli
+
 # run the startup script
 CMD ["sh", "/app/startup.sh"]
 
