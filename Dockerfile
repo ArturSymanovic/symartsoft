@@ -81,10 +81,11 @@ RUN chmod 755 /app/startup.sh
 # replace default nginx configuration file with our custom one
 RUN rm /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx
+COPY proxy.conf /etc/nginx/proxy.conf
 
 # expose port 80 for http (and 443 for https at a later stage) - will be used by nginx
 EXPOSE 80
-#EXPOSE 443
+EXPOSE 443
 
 # override environment variable so that our application listen to port 5000
 ENV ASPNETCORE_URLS http://+:5000
