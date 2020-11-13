@@ -1,7 +1,5 @@
 #!/bin/bash
 az login --identity
-az keyvault secret show --name SampleSecret --vault-name SymartsoftKV --query value | cat
-az keyvault certificate download --name symartsoftpemcert --vault-name SymartsoftKV 
 
 az keyvault secret download --name symartsoftkey --vault-name SymartsoftKV --file symartsoftrawkey.txt
 az keyvault secret download --name beginkey --vault-name SymartsoftKV --file beginkey.txt
@@ -21,6 +19,8 @@ cat crt3.txt | tr [:space:] '\n' >> crt3.crt
 cat begin.txt <(echo) crt1.crt <(echo) end.txt <(echo) begin.txt <(echo) crt2.crt <(echo) end.txt <(echo) begin.txt <(echo) crt3.crt <(echo) end.txt <(echo) >> /etc/ssl/certs/symartsoft.crt
 cat beginkey.txt <(echo) symartsoftkey.txt <(echo) endkey.txt <(echo) >> /etc/ssl/certs/symartsoft.key
 
+cat /etc/ssl/certs/symartsoft.crt
+cat /etc/ssl/certs/symartsoft.key
 
 service nginx start
 dotnet /app/API.dll
