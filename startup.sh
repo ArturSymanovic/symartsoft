@@ -2,7 +2,7 @@
 az login --identity
 
 az keyvault secret download --name symartsoftkey --vault-name SymartsoftKV --file /app/symartsoftrawkey.txt
-az keyvault secret download --name beginkey --vault-name SymartsoftKV --file b/app/eginkey.txt
+az keyvault secret download --name beginkey --vault-name SymartsoftKV --file /app/beginkey.txt
 az keyvault secret download --name endkey --vault-name SymartsoftKV --file /app/endkey.txt
 
 az keyvault secret download --name begin --vault-name SymartsoftKV --file /app/begin.txt
