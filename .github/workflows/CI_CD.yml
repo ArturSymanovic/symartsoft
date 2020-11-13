@@ -9,6 +9,8 @@ on: [push]
 jobs:
   CI:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.update_release_draft.outputs.tag_name }}
     steps:
       -
         name: Checkout
@@ -45,6 +47,13 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       -
+        name: Update release draft
+        id: update_release_draft
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      -
         name: Build, test and push image
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v2
@@ -52,10 +61,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: artursymanovic/symartsoft:latest
+          tags: artursymanovic/symartsoft:${{ steps.update_release_draft.outputs.tag_name }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache          
-    
   CD:
     needs: [CI]
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -71,16 +79,4 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az container restart --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.CONTAINER_NAME }}
-  
-  Update_Release_Draft:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    steps:
-      # Drafts next Release notes as Pull Requests are merged into "main"
-      - uses: release-drafter/release-drafter@v5
-      # with:
-          # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-          # config-name: my-config.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          az container create --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.CONTAINER_NAME }} --image ${{needs.CI.outputs.output1}} --dns-name-label symartsoft --ports 80 443 --os-type Linux --assign-identity --restart-policy OnFailure
