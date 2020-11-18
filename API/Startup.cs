@@ -68,7 +68,12 @@ namespace API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
             }
 
-            //app.UseHttpsRedirection();
+            // Apply database migrations
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+                db.Database.Migrate();
+            }         
 
             app.UseRouting();
 
