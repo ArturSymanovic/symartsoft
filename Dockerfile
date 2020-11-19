@@ -35,7 +35,10 @@ COPY *.sln .
 COPY API/API.csproj ./API/
 COPY API.Tests/API.Tests.csproj ./API.Tests/
 COPY --from=build-client /app/client/dist ./API/wwwroot
-CMD [/app/startup.sh]
+
+# restore package dependencies for the solution	
+RUN dotnet restore
+
 # copy full solution over
 COPY . .
 
