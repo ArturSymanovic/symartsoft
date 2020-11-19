@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,16 +19,32 @@ namespace API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            Env = env;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString ="";
+            if (Env.IsDevelopment())
+            {
+                connectionString = Configuration.GetConnectionString("symartsoft_dev");
+            }
+            if (Env.IsProduction())
+            {
+                connectionString = Configuration.GetConnectionString("symartsoft_prod");
+            }
+            services.AddDbContext<DataContext>(options => 
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -50,7 +68,12 @@ namespace API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
             }
 
-            //app.UseHttpsRedirection();
+            // Apply database migrations
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+                db.Database.Migrate();
+            }         
 
             app.UseRouting();
 
