@@ -3,6 +3,9 @@
 #login to azure using system identity
 az login --identity
 
+# retrieve database connection string and put it in environment variable
+export ConnectionStrings__symartsoft_prod=$(az keyvault secret show --name symartsof-prod-conn-string --vault-name SymartsoftKV --query value)
+
 # retrieve key related secrets and remove double quotes
 az keyvault secret show --name symartsoftkey --vault-name SymartsoftKV --query value | sed 's/\"//g' >> /app/symartsoftrawkey.txt
 az keyvault secret show --name beginkey --vault-name SymartsoftKV --query value | sed 's/\"//g' >> /app/beginkey.txt
@@ -21,7 +24,7 @@ cat /app/crt1.txt | tr [:space:] '\n' | cat >> /app/crt11.txt
 cat /app/crt2.txt | tr [:space:] '\n' | cat >> /app/crt22.txt
 cat /app/crt3.txt | tr [:space:] '\n' | cat >> /app/crt33.txt
 
-# combine certificat files into necessary PEM format
+# combine certificate files into necessary PEM format
 cat /app/begin.txt /app/crt11.txt /app/end.txt /app/begin.txt /app/crt22.txt /app/end.txt /app/begin.txt /app/crt33.txt /app/end.txt >> /etc/ssl/certs/symartsoftcrt.txt
 
 # combine secret file
