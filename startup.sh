@@ -3,8 +3,8 @@
 #login to azure using system identity
 az login --identity
 
-# retrieve database connection string and put it in environment variable
-export ConnectionStrings__symartsoft_prod=$(az keyvault secret show --name symartsof-prod-conn-string --vault-name SymartsoftKV --query value)
+# set connection string environment variable
+export ConnectionStrings__symartsoft_prod=$(az keyvault secret show --name symartsof-prod-conn-string --vault-name SymartsoftKV --query value | sed 's/\"//g')
 
 # retrieve key related secrets and remove double quotes
 az keyvault secret show --name symartsoftkey --vault-name SymartsoftKV --query value | sed 's/\"//g' >> /app/symartsoftrawkey.txt
