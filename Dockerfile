@@ -36,7 +36,7 @@ COPY API/API.csproj ./API/
 COPY API.Tests/API.Tests.csproj ./API.Tests/
 COPY --from=build-client /app/client/dist ./API/wwwroot
 
-# restore package dependencies for the solution
+# restore package dependencies for the solution	
 RUN dotnet restore
 
 # copy full solution over
@@ -95,7 +95,7 @@ RUN apt install -y curl
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 # run the startup script
-CMD ["sh", "/app/startup.sh"]
+CMD /bin/bash /app/startup.sh
 
 # docker build . -t production:latest
 # docker run -p 80:80 --rm --name production -it production:latest
