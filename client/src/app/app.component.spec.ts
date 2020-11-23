@@ -6,6 +6,8 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatToolbarHarness } from '@angular/material/toolbar/testing'
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonHarness } from '@angular/material/button/testing'
+import { MatButtonModule } from '@angular/material/button'
 
 describe('AppComponent', () => {
 
@@ -41,10 +43,15 @@ describe('AppComponent', () => {
     expect (toolbar).toBeTruthy();
   });
 
-  it(`toolbar text shoud contain title`, async () => {
+  it(`should have title text inside toolbar`, async () => {
     const toolbar = await loader.getHarness(MatToolbarHarness);
     const text = (await toolbar.getRowsAsText())[0];
     expect (text).toContain(fixture.componentInstance.title);
+  });
+
+  it(`should have button`, async () => {
+    const button = await loader.getHarness(MatButtonHarness);
+    expect (button).toBeTruthy();
   });
 
 });
