@@ -5,21 +5,15 @@ import { AppComponent } from './app.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 
-
 describe('AppComponent', () => {
-
   let loader: HarnessLoader;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -34,7 +28,6 @@ describe('AppComponent', () => {
 
   it('should create navbar', () => {
     const navbar = fixture.nativeElement.querySelector('app-nav');
-    expect (navbar).toBeTruthy();
+    expect(navbar).toBeTruthy();
   });
-
 });
