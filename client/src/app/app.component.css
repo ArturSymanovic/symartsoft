@@ -2,7 +2,6 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    background-color: transparent;
     z-index: 10000;
     width: 100%;
 }

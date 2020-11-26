@@ -1,6 +1,19 @@
-section {
+.headline-section {
     background-image: url(../../assets/blue-1634110.svg);
     background-position: center;
     background-size: cover;
     height: 100vh;
+}
+
+.headline-text {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding-bottom: 100px;
+}
+
+.sub-headline-text {
+    padding-left: 50px;
 }
