@@ -1,0 +1,28 @@
+.main-navbar {
+    max-height: 56px;
+    height: 56px;
+    background-image: url(../../../assets/blue-1634110.svg);
+    background-position: top;
+    background-size: cover;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+a {
+    text-decoration: none;
+    color: lightgray;
+} 
+
+a:hover, a:active{
+    color: white;
+}
+
+.title {
+    color: white;
+}
+
+.nav-icon {
+    font-size: 20px;
+}
