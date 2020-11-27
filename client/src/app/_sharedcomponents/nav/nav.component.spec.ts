@@ -32,13 +32,24 @@ describe('NavComponent', () => {
     expect(toolbar).toBeTruthy();
   });
 
-  it(`should render the link to home component`, () => {
+  it(`should render the link to home`, () => {
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement.getAttribute('href'));
     expect(
       hrefs.findIndex((l) => {
         return l == '/';
+      })
+    ).not.toEqual(-1);
+  });
+
+  it(`should render the link to blog`, () => {
+    let hrefs = fixture.debugElement
+      .queryAll(By.css('a'))
+      .map((l) => l.nativeElement.getAttribute('href'));
+    expect(
+      hrefs.findIndex((l) => {
+        return l == '/blog';
       })
     ).not.toEqual(-1);
   });
