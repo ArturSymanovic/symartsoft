@@ -31,7 +31,6 @@ describe('HomeComponent', () => {
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement.getAttribute('routerLink'));
-      console.log(hrefs);
     expect(
       hrefs.findIndex((l) => {
         return l == '/about';
@@ -43,7 +42,6 @@ describe('HomeComponent', () => {
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement.getAttribute('routerLink'));
-      console.log(hrefs);
     expect(
       hrefs.findIndex((l) => {
         return l == '/blog';
