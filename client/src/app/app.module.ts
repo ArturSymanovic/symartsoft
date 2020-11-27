@@ -11,13 +11,15 @@ import { NavComponent } from './_sharedcomponents/nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BlogComponent } from './blog/blog.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    BlogComponent
+    BlogComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
