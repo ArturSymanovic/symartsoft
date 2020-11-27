@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BlogComponent } from './blog/blog.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SigninComponent } from './auth/signin/signin.component';
     NavComponent,
     HomeComponent,
     BlogComponent,
-    SigninComponent
+    SigninComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
