@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.Helpers;
 using API.Models.Auth;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -34,7 +36,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             var connectionString ="";
+
+            services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
+
+            var connectionString ="";
             if (Env.IsDevelopment())
             {
                 connectionString = Configuration.GetConnectionString("symartsoft_dev");

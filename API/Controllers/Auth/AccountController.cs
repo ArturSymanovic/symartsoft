@@ -1,9 +1,9 @@
-using System;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Models.Auth;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers.Auth
 {
@@ -11,37 +11,23 @@ namespace API.Controllers.Auth
     {
         public UserManager<AppUser> UserManager { get; }
         public SignInManager<AppUser> SignInManager { get; }
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public IMapper Mapper { get; }
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper)
         {
+            this.Mapper = mapper;
             this.SignInManager = signInManager;
             this.UserManager = userManager;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(string username, string password)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await UserExists(username)) return BadRequest("Username is taken.");
+            var user = Mapper.Map<AppUser>(registerDto);
 
-            var userToCreate = new AppUser
-            {
-                UserName=username
-            };
-            
-            var creationResult = await UserManager.CreateAsync(userToCreate, password);
+            var result = await UserManager.CreateAsync(user, registerDto.Password);
 
-            if (!creationResult.Succeeded)
-            {
-                return BadRequest(creationResult.Errors);
-            }
-
-            return await UserManager.Users.FirstOrDefaultAsync(u => u.UserName == username);
+            if (!result.Succeeded) return BadRequest(result.Errors);
+            return Mapper.Map<UserDto>(user);
         }
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<bool> UserExists(string username)
-        {
-            return await UserManager.Users.AnyAsync(u => u.UserName == username);
-        }
-
     }
 }
