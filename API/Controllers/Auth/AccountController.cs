@@ -42,5 +42,18 @@ namespace API.Controllers.Auth
             if (!result.Succeeded) return Unauthorized("Invalid Credentials");
             return Mapper.Map<UserDto>(user);
         }
+
+        // [HttpPost("deleteallusers")]
+        // public async Task<ActionResult> DeleteAllUsers()
+        // {
+        //     var users = await UserManager.Users.ToListAsync();
+            
+        //     foreach (var user in users)
+        //     {
+        //         await UserManager.DeleteAsync(user);
+        //     }
+        //     return Ok();
+        // }
+
     }
 }
