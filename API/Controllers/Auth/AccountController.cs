@@ -4,6 +4,7 @@ using API.Models.Auth;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers.Auth
 {
@@ -27,6 +28,18 @@ namespace API.Controllers.Auth
             var result = await UserManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
+            return Mapper.Map<UserDto>(user);
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
+            var user = await UserManager.Users.SingleOrDefaultAsync(u => u.Email == loginDto.Email);
+            if (user == null) return Unauthorized("Invalid credentials");
+
+            var result = await SignInManager.PasswordSignInAsync(user, loginDto.Password, false, true);
+
+            if (!result.Succeeded) return Unauthorized("Invalid Credentials");
             return Mapper.Map<UserDto>(user);
         }
     }

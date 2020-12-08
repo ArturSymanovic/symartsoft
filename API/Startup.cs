@@ -62,6 +62,7 @@ namespace API
             services.AddIdentityCore<AppUser>( opt => 
             {
                 opt.Password.RequireNonAlphanumeric = false;
+                opt.User.RequireUniqueEmail = true;
             })
                 .AddRoles<AppRole>()
                 .AddRoleManager<RoleManager<AppRole>>()
