@@ -15,7 +15,7 @@ namespace API.Services
 
         public TokenService()
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(System.Environment.GetEnvironmentVariable("Symartsoft_TokenKey")));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(System.Environment.GetEnvironmentVariable("SymartsoftTokenKey")));
         }
 
         public string CreateToken(AppUser user)
