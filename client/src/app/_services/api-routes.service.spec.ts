@@ -13,4 +13,12 @@ describe('ApiRoutesService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('#registerUrl should return valid url', () => {
+      expect(() => {new URL(service.registerUrl())}).not.toThrowError();
+  });
+
+  it('#loginUrl should return valid url', () => {
+    expect(() => {new URL(service.loginUrl())}).not.toThrowError();
+});
 });

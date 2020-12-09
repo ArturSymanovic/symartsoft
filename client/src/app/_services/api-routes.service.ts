@@ -11,4 +11,8 @@ export class ApiRoutesService {
   registerUrl(): string{
     return this.baseUrl + `account/register`;
   }
+
+  loginUrl(): string{
+    return this.baseUrl + `account/login`;
+  }
 }
