@@ -57,7 +57,9 @@ describe('NavComponent', () => {
     ).not.toEqual(-1);
   });
 
-  it(`should render the link to sign in`, () => {
+  it(`should render the link to sign in if there is no current user`, () => {
+    fixture.componentInstance.authService.setCurrentUser(null);
+    fixture.detectChanges();
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement.getAttribute('href'));
@@ -67,4 +69,39 @@ describe('NavComponent', () => {
       })
     ).not.toEqual(-1);
   });
+
+  it(`should render the button to sign out if user is logged in`, () => {
+    fixture.componentInstance.authService.setCurrentUser({
+      email:'test',
+      token: 'test'
+    });
+    fixture.detectChanges();
+    let hrefs = fixture.debugElement
+      .queryAll(By.css('a'))
+      .map((l) => l.nativeElement.innerText);
+    expect(
+      hrefs.findIndex((l: string) => {
+        return l.includes('SIGN OUT');
+      })
+    ).not.toEqual(-1);
+  });
+
+  it(`sign out button should call auth service logout method`, () => {
+    spyOn(fixture.componentInstance.authService, 'logout');
+    fixture.componentInstance.authService.setCurrentUser({
+      email:'test',
+      token: 'test'
+    });
+    fixture.detectChanges();
+    let href: HTMLElement = fixture.debugElement
+      .queryAll(By.css('a'))
+      .map((l) => l.nativeElement)
+      .filter((l) => {
+        return l.innerText.includes('SIGN OUT')
+      })[0];
+    href.click();
+    expect(fixture.componentInstance.authService.logout).toHaveBeenCalled();   
+  });
+
+
 });

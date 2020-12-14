@@ -11,4 +11,8 @@ export class NavComponent implements OnInit {
   constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
+
+  logout(){
+    this.authService.logout();
+  }
 }

@@ -19,6 +19,14 @@ a:hover, a:active{
     color: white;
 }
 
+button{
+    color:lightgray;
+}
+
+button:hover {
+    color: white;
+}
+
 .title {
     color: white;
 }
