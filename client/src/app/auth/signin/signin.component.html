@@ -1,3 +1,15 @@
-<div class="content-container">
-    <p class="mat-title">Under Development</p>
+<div class="flex-container">
+    <form [formGroup]="signInForm" >
+        <h1>Sign In</h1>
+        <mat-form-field class="w-100" appearance="fill" color="primary">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="w-100" appearance="fill" color="primary">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="login();">Sign In</button>        
+      </form>
 </div>
+

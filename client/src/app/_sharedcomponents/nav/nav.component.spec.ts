@@ -7,6 +7,8 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from 'src/app/_services/auth.service';
 
 describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
@@ -14,8 +16,9 @@ describe('NavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatToolbarModule, RouterTestingModule],
+      imports: [MatToolbarModule, RouterTestingModule, HttpClientModule],
       declarations: [NavComponent],
+      providers: [AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(NavComponent);

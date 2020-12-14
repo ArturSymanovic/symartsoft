@@ -6,6 +6,7 @@
   <a mat-button routerLink="/blog">
     BLOG
   </a>
+  <a mat-button *ngIf="authService.currentUser$ | async">loggedfin</a>
   <span class="spacer"></span>
   <a mat-button routerLink="/signin">
     <mat-icon class="nav-icon">account_circle</mat-icon> SIGN IN

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule} from '@angular/material/input';
 import { NavComponent } from './_sharedcomponents/nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -14,6 +15,8 @@ import { BlogComponent } from './blog/blog.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { RegisterComponent } from './auth/register/register.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
