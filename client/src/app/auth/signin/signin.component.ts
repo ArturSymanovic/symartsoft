@@ -4,6 +4,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-signin',
@@ -12,7 +13,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -29,6 +30,13 @@ export class SigninComponent implements OnInit {
   }
 
   login(){
-    this.authService.login(this.signInForm.value).subscribe();
+    this.authService.login(this.signInForm.value).subscribe({
+      next: (response) => {
+        this.router.navigateByUrl('/');
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 }

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SigninComponent } from './signin.component';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SigninComponent', () => {
   let loader: HarnessLoader;
@@ -20,7 +21,9 @@ describe('SigninComponent', () => {
       imports: [
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        HttpClientModule 
+        HttpClientModule,
+        RouterTestingModule.withRoutes([
+        ])
       ],
       providers: [AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -50,4 +53,5 @@ describe('SigninComponent', () => {
     await signInButton.click();
     expect(fixture.componentInstance.login).toHaveBeenCalled();
   });
+
 });
