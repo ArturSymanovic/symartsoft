@@ -15,7 +15,7 @@ a {
     color: lightgray;
 } 
 
-a:hover, a:active{
+a:hover, a.active{
     color: white;
 }
 

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
@@ -13,7 +10,11 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -21,22 +22,28 @@ export class SigninComponent implements OnInit {
 
   initializeForm(): void {
     this.signInForm = new FormGroup({
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl()
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl(),
     });
   }
 
-  login(){
+  login() {
     this.authService.login(this.signInForm.value).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/');
+        this.snackbar.open('Logged In', '', {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        });
       },
       error: (error) => {
-        console.log(error);
-      }
+        this.snackbar.open(error.error, '', {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        });
+      },
     });
   }
 }

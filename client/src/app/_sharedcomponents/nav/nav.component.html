@@ -3,14 +3,14 @@
     <mat-icon class="nav-icon">home</mat-icon>
     <span class="mat-title title"> {{ title }}</span>
   </a>
-  <a mat-button routerLink="/blog">
+  <a mat-button routerLink="/blog" routerLinkActive="active">
     BLOG
   </a>
   <span class="spacer"></span>
   <a mat-button routerLink="/signin" *ngIf="(authService.currentUser$ | async) === null">
     <mat-icon class="nav-icon">account_circle</mat-icon> SIGN IN
   </a>
-  <a mat-button routerLink="/" (click)="logout();" *ngIf="(authService.currentUser$ | async)">
+  <a mat-button (click)="logout();" *ngIf="(authService.currentUser$ | async)">
     SIGN OUT
   </a>
 </mat-toolbar>

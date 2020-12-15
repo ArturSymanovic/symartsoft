@@ -6,3 +6,7 @@ body { margin: 0; font-family: Catamaran, Roboto, "Helvetica Neue", sans-serif; 
 .content-container {
     margin-top: 56px;
 }
+
+.cdk-overlay-container {
+    z-index: 10000;
+}
