@@ -18,6 +18,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MaterialsModule } from './_modules/materials/materials.module';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MaterialsModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

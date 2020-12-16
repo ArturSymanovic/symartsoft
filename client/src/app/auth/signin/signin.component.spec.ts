@@ -10,6 +10,7 @@ import { SigninComponent } from './signin.component';
 import { AuthService } from 'src/app/_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
 
 describe('SigninComponent', () => {
   let loader: HarnessLoader;
@@ -22,6 +23,7 @@ describe('SigninComponent', () => {
         BrowserAnimationsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MaterialsModule,
         RouterTestingModule.withRoutes([
         ])
       ],

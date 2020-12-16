@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/_services/auth.service';
+import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
 
 describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
@@ -16,7 +17,12 @@ describe('NavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatToolbarModule, RouterTestingModule, HttpClientModule],
+      imports: [
+        MatToolbarModule,
+        RouterTestingModule,
+        HttpClientModule,
+        MaterialsModule,
+      ],
       declarations: [NavComponent],
       providers: [AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -72,8 +78,8 @@ describe('NavComponent', () => {
 
   it(`should render the button to sign out if user is logged in`, () => {
     fixture.componentInstance.authService.setCurrentUser({
-      email:'test',
-      token: 'test'
+      email: 'test',
+      token: 'test',
     });
     fixture.detectChanges();
     let hrefs = fixture.debugElement
@@ -89,19 +95,17 @@ describe('NavComponent', () => {
   it(`sign out button should call auth service logout method`, () => {
     spyOn(fixture.componentInstance.authService, 'logout');
     fixture.componentInstance.authService.setCurrentUser({
-      email:'test',
-      token: 'test'
+      email: 'test',
+      token: 'test',
     });
     fixture.detectChanges();
     let href: HTMLElement = fixture.debugElement
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement)
       .filter((l) => {
-        return l.innerText.includes('SIGN OUT')
+        return l.innerText.includes('SIGN OUT');
       })[0];
     href.click();
-    expect(fixture.componentInstance.authService.logout).toHaveBeenCalled();   
+    expect(fixture.componentInstance.authService.logout).toHaveBeenCalled();
   });
-
-
 });
