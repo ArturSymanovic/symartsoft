@@ -1,6 +1,7 @@
 using API.Data;
 using API.Extensions;
 using API.Helpers;
+using API.Middleware;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,15 +44,19 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Error handling and logging
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseSerilogRequestLogging();
+
+            //SSL
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+            //Swagger for API testing during development
             if (env.IsDevelopment())
-            {
-                app.UseSerilogRequestLogging();
-                app.UseDeveloperExceptionPage();
+            {                
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
             }

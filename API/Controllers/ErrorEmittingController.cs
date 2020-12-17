@@ -28,7 +28,6 @@ namespace API.Controllers
         [HttpGet("notfound")]
         public ActionResult<AppUser> GetNotFound()
         {
-            Log.Error(new Exception("test"), "test message");
             var notExistingUser = Context.Users.Find("notexists");
 
             if (notExistingUser == null) return NotFound();
