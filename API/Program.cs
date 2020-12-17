@@ -15,16 +15,23 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             string connString = "";
+            string configurationFile = "";
             if (env == "Development")
+            {
                 connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_dev");
+                configurationFile = "appsettings.Development.json";
+            }                
             if (env == "Production")
+            {
                 connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_prod");
+                configurationFile = "appsettings.json";
+            }
+
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile(configurationFile)
+                .Build();
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
@@ -34,8 +41,9 @@ namespace API
                     sinkOptions: new MSSqlServerSinkOptions 
                     { 
                         TableName = "Logs",
-                        AutoCreateSqlTable = true 
-                    })
+                        AutoCreateSqlTable = true, 
+                    },
+                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
                 .CreateLogger();
 
             try
