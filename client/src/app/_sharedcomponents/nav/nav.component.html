@@ -10,6 +10,9 @@
   <a mat-button routerLink="/signin" *ngIf="(authService.currentUser$ | async) === null">
     <mat-icon class="nav-icon">account_circle</mat-icon> SIGN IN
   </a>
+  <!-- <a mat-button routerLink="/test-errors">
+    TEST ERRORS
+  </a> -->
   <a mat-button (click)="logout();" *ngIf="(authService.currentUser$ | async)">
     SIGN OUT
   </a>

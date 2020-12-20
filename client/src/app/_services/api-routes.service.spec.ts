@@ -20,5 +20,25 @@ describe('ApiRoutesService', () => {
 
   it('#loginUrl should return valid url', () => {
     expect(() => {new URL(service.loginUrl())}).not.toThrowError();
-});
+  });
+
+  it('#error400Url should return valid url', () => {
+    expect(() => {new URL(service.error400Url())}).not.toThrowError();
+  });
+
+  it('#errorValidation400Url should return valid url', () => {
+    expect(() => {new URL(service.errorValidation400Url())}).not.toThrowError();
+  });
+
+  it('#error401Url should return valid url', () => {
+    expect(() => {new URL(service.error401Url())}).not.toThrowError();
+  });
+
+  it('#error404Url should return valid url', () => {
+    expect(() => {new URL(service.error404Url())}).not.toThrowError();
+  });
+
+  it('#error500Url should return valid url', () => {
+    expect(() => {new URL(service.error500Url())}).not.toThrowError();
+  });
 });
