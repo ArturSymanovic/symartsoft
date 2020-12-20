@@ -12,9 +12,10 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialsModule } from './_modules/materials/materials.module';
 import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors
     HttpClientModule,
     MaterialsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
