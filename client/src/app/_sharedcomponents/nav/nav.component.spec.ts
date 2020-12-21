@@ -10,6 +10,7 @@ import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/_services/auth.service';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
+import { MatMenuHarness } from '@angular/material/menu/testing'
 
 describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
@@ -76,11 +77,13 @@ describe('NavComponent', () => {
     ).not.toEqual(-1);
   });
 
-  it(`should render the button to sign out if user is logged in`, () => {
+  it(`should render the button to sign out if user is logged in`, async () => {
     fixture.componentInstance.authService.setCurrentUser({
       email: 'test',
       token: 'test',
     });
+    const menuHarness = await loader.getHarness(MatMenuHarness);
+    await menuHarness.open();
     fixture.detectChanges();
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
@@ -92,12 +95,14 @@ describe('NavComponent', () => {
     ).not.toEqual(-1);
   });
 
-  it(`sign out button should call auth service logout method`, () => {
+  it(`sign out button should call auth service logout method`, async () => {
     spyOn(fixture.componentInstance.authService, 'logout');
     fixture.componentInstance.authService.setCurrentUser({
       email: 'test',
       token: 'test',
     });
+    const menuHarness = await loader.getHarness(MatMenuHarness);
+    await menuHarness.open();
     fixture.detectChanges();
     let href: HTMLElement = fixture.debugElement
       .queryAll(By.css('a'))

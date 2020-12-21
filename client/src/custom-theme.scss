@@ -92,3 +92,7 @@ $dark-theme:   mat-dark-theme((
 .client-dark-theme {
   @include angular-material-color($dark-theme);
 }
+
+.color-primary{
+  color: mat-color($client-primary, default);
+}

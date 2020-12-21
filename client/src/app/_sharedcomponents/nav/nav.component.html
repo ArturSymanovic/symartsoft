@@ -1,20 +1,33 @@
 <mat-toolbar class="main-navbar mat-elevation-z4">
-  <a mat-button routerLink="/">
+  <a mat-button routerLink="/" class="nav-link">
     <mat-icon class="nav-icon">home</mat-icon>
-    <span class="mat-title title"> {{ title }}</span>
+    <span class="mat-title  title"> {{ title }}</span>
   </a>
-  <a mat-button routerLink="/blog" routerLinkActive="active">
+  <a mat-button routerLink="/blog" routerLinkActive="active" class="nav-link">
     BLOG
   </a>
   <span class="spacer"></span>
-  <a mat-button routerLink="/signin" *ngIf="(authService.currentUser$ | async) === null">
+  <a mat-button routerLink="/signin" *ngIf="(authService.currentUser$ | async) === null" class="nav-link">
     SIGN IN
   </a>
   <!-- <a mat-button routerLink="/test-errors">
     TEST ERRORS
   </a> -->
-  <a mat-button (click)="logout();" *ngIf="(authService.currentUser$ | async)">
-    <mat-icon class="nav-icon">account_circle</mat-icon> SIGN OUT
-  </a>
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="(authService.currentUser$ | async)" class="nav-link">
+    <mat-icon class="nav-icon">account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+      <div class="color-primary">
+        <div class="user-email">
+          <mat-icon color="primary" class="menu-item-icon" style="margin-right: 16px;">account_circle</mat-icon>
+          <span class="menu-item-text">{{(authService.currentUser$ | async)?.email}}</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <a (click)="logout();" class="color-primary menu-item-link" mat-menu-item >
+        <mat-icon color="primary" class="menu-item-icon">exit_to_app</mat-icon>
+        <span class="menu-item-text">SIGN OUT</span>
+      </a>
+  </mat-menu>
 </mat-toolbar>
 
