@@ -20,8 +20,10 @@
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="login();" [disabled]="!signInForm.valid">Sign In</button>   
         <div *ngIf="validationErrors.length > 0">
-          <mat-error *ngFor="let error of validationErrors" class="error-summary">{{error}}</mat-error>
-        </div>    
+          <mat-error *ngFor="let error of validationErrors" class="error-summary
+          ">{{error}}</mat-error>
+        </div> 
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>   
       </form>
 </div>
 

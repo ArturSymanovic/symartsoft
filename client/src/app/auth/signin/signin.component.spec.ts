@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
+import { By } from '@angular/platform-browser';
 
 describe('SigninComponent', () => {
   let loader: HarnessLoader;
@@ -56,6 +57,12 @@ describe('SigninComponent', () => {
     const signInButton = await loader.getHarness(MatButtonHarness.with({text: `Sign In`}));
     await signInButton.click();
     expect(fixture.componentInstance.login).toHaveBeenCalled();
+  });
+
+  it(`should render urt to register`, async () => {
+    //var registerUrl = await loader.getHarness(MatButtonHarness.with({selector: `a[href='/register']`}));
+    const registerUrl =  fixture.debugElement.queryAll(By.css(`a[href='/register']`));
+    expect(registerUrl.length).toBeGreaterThan(0);
   });
 
 });

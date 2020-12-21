@@ -40,15 +40,32 @@ describe('AuthService', () => {
     });
   });
 
-  it('#register should return user object', () => {
+  it('#register should save user object to local storage', () => {
     const userStub: User = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
     httpClientSpy.post.and.returnValue(of(userStub));
     authService.register(null).subscribe({
-      next: (userObject) => expect(userObject).toEqual(userStub, 'userStub'),
+      next: (userObject) => expect(localStorage.getItem('user')).not.toBeNull()
     });
+  });
+
+  // if the done function is not executed the test will fail with timeout error
+  // this done function needed for the case where the observable was never updated 
+  it('#register should update value in the current user observable', done => {
+    const userStub: User = {
+      email: 'test1@example.com',
+      token: 'asdasdgdfghdfg',
+    };
+    httpClientSpy.post.and.returnValue(of(userStub));
+    authService.register(null).subscribe();   
+    authService.currentUser$.subscribe({
+      next: (user: User) => {
+        expect(user).toEqual(userStub);
+        done();
+      }
+    });   
   });
 
   it('#register should return an error when the server returns an error', () => {

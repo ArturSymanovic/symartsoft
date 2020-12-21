@@ -15,9 +15,17 @@ export class AuthService {
   constructor(private http: HttpClient, private apiRoutes: ApiRoutesService) { }
 
   register(model: any){
-    return this.http.post(this.apiRoutes.registerUrl(), model);
+    return this.http.post(this.apiRoutes.registerUrl(), model).pipe(
+      map((response: User) => {
+        const user = response;
+        if (user) {
+          localStorage.setItem('user', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    );
   }
-
+  
   login(model: any){
     return this.http.post(this.apiRoutes.loginUrl(), model).pipe(
       map((response: User) => {

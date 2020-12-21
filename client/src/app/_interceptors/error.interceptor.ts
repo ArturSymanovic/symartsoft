@@ -22,6 +22,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (error) {
         switch (error.status) {
           case 400:
+            this.snackbar.open(error.statusText, '', {
+              duration: 2000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
             if (error.error.errors) {
               const modelStateErrors = [];
               for (const key in error.error.errors){
@@ -30,12 +35,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
               }
               throw modelStateErrors.flat();
-            } else {
-              this.snackbar.open(error.statusText, '', {
-                duration: 2000,
-                horizontalPosition: 'right',
-                verticalPosition: 'bottom',
-              });
+            } else if (Array.isArray(error.error)){
+              const modelStateErrors = [];
+              for (const err of error.error){
+                modelStateErrors.push(err.description);             
+              }
+              throw modelStateErrors;
             }
             break;
 
