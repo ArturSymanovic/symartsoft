@@ -41,7 +41,7 @@ namespace API.Controllers.Auth
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await UserManager.Users.SingleOrDefaultAsync(u => u.Email == loginDto.Email);
-            if (user == null) return Unauthorized("Invalid credentials");
+            if (user == null) return Unauthorized("Invalid Credentials");
 
             var result = await SignInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
