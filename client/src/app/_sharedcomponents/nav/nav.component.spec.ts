@@ -20,7 +20,10 @@ describe('NavComponent', () => {
       imports: [
         MatToolbarModule,
         RouterTestingModule,
-        HttpClientModule,<mat-icon class="nav-icon">account_circle</mat-icon>
+        HttpClientModule,
+        MaterialsModule,
+      ],
+      declarations: [NavComponent],
       providers: [AuthService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
