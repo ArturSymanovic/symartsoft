@@ -51,6 +51,8 @@ describe('SigninComponent', () => {
 
   it(`#sign in button should call login method`, async () => {
     spyOn(fixture.componentInstance, 'login');
+    fixture.componentInstance.signInForm.controls.email.setValue("test@test");
+    fixture.componentInstance.signInForm.controls.password.setValue("password");
     const signInButton = await loader.getHarness(MatButtonHarness.with({text: `Sign In`}));
     await signInButton.click();
     expect(fixture.componentInstance.login).toHaveBeenCalled();

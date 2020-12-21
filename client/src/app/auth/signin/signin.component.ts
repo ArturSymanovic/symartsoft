@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
+  validationErrors: string[] = [];
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -23,7 +24,7 @@ export class SigninComponent implements OnInit {
   initializeForm(): void {
     this.signInForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl(),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
@@ -38,11 +39,14 @@ export class SigninComponent implements OnInit {
         });
       },
       error: (error) => {
-        this.snackbar.open(error.error, '', {
-          duration: 2000,
-          horizontalPosition: 'right',
-          verticalPosition: 'bottom',
-        });
+        if (Array.isArray(error)) {
+          this.validationErrors = error;
+        }
+        else if (error.error){
+          this.validationErrors = [];
+          this.validationErrors.push(error.error);
+        }
+        
       },
     });
   }

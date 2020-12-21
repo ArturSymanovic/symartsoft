@@ -29,9 +29,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                   modelStateErrors.push(error.error.errors[key]);
                 }
               }
-              throw modelStateErrors;
+              throw modelStateErrors.flat();
             } else {
-              this.snackbar.open(error.status.toString() + ': '+ error.statusText, '', {
+              this.snackbar.open(error.statusText, '', {
                 duration: 2000,
                 horizontalPosition: 'right',
                 verticalPosition: 'bottom',
@@ -40,7 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             break;
 
           case 401:
-            this.snackbar.open(error.status.toString() + ': '+ error.statusText, '', {
+            this.snackbar.open(error.statusText, '', {
               duration: 2000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom',

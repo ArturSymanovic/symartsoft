@@ -1,5 +1,6 @@
-  .w-100 {
+  .form-field {
     width: 100%;
+    padding-bottom: 5px;
   }
 
   .flex-container {
@@ -16,4 +17,9 @@
     background-color: rgba(230, 230, 250, 1);
     padding:2%;
     margin: 5%;
+  }
+
+  .error-summary {
+    font-size: 80%;
+    padding-top: 5px;
   }
