@@ -71,7 +71,7 @@ namespace API
             app.UseRouting();
             app.UseCors(policy => 
             {
-                policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();//.WithOrigins("http://localhost:4200", "https://www.symartsoft.com");
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://www.symartsoft.com");
             });
             app.UseAuthentication();
             app.UseAuthorization();
