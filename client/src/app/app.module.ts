@@ -17,6 +17,7 @@ import { MaterialsModule } from './_modules/materials/materials.module';
 import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
+import { ServerErrorComponent } from './_sharedcomponents/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.compo
     AboutComponent,
     RegisterComponent,
     TestErrorsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
