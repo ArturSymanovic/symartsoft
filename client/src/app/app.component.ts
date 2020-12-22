@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { JsonpClientBackend } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { User } from './_models/user';
+import { AuthService } from './_services/auth.service';
 
 // declare gtag as a function to access the JS code in TS
 declare let gtag: Function;
@@ -9,8 +12,8 @@ declare let gtag: Function;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  constructor(public router: Router) {
+export class AppComponent implements OnInit {
+  constructor(public router: Router, public authService: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         gtag('config', 'G-GZK6SGX0XG', { page_path: event.urlAfterRedirects });
@@ -19,5 +22,13 @@ export class AppComponent {
         // })
       }
     });
+  }
+  ngOnInit(): void {
+    this.setCurrentUser();
+  }
+
+  setCurrentUser(){
+    const user: User =  JSON.parse(localStorage.getItem('user'));
+    this.authService.setCurrentUser(user);
   }
 }

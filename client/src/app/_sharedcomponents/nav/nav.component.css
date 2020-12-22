@@ -10,19 +10,64 @@
     flex: 1 1 auto;
 }
 
-a {
+.nav-link{
     text-decoration: none;
     color: lightgray;
+    vertical-align: middle;
+    font-size: 17px;
 } 
 
-a:hover, a:active{
+.nav-link:hover, .nav-link:active{
+    color: white;
+}
+
+button{
+    color:lightgray;
+}
+
+button:hover {
     color: white;
 }
 
 .title {
     color: white;
+    margin-bottom: 0;
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
 }
 
 .nav-icon {
-    font-size: 20px;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+}
+
+.menu-item-link {
+    vertical-align: middle;
+}
+
+.menu-item-text {
+    font-size: 17px;
+    vertical-align: middle;
+}
+
+.menu-item-icon{
+    font-size: 26px;
+    height:26px;
+    width:26px;
+    vertical-align: middle;
+}
+
+.user-email{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 14px;
+    padding-top: 12px;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important; 
 }
