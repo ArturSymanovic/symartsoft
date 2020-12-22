@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatInputModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -35,7 +37,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatListModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule
   ]
 })
 export class MaterialsModule { }
