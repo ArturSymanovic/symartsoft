@@ -79,4 +79,5 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-          az container create --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.CONTAINER_NAME }} --image artursymanovic/symartsoft:${{needs.CI.outputs.output1}} --dns-name-label symartsoft --ports 80 443 --os-type Linux --assign-identity --restart-policy Never --cpu 1 --memory 1
+          az container create --resource-group ${{ secrets.RESOURCE_GROUP }} --name ${{ secrets.CONTAINER_NAME }} --image artursymanovic/symartsoft:${{needs.CI.outputs.output1}} --dns-name-label symartsoft --ports 80 443 --os-type Linux --assign-identity --restart-policy Never --cpu 1 --memory 1 --environment-variables ASPNETCORE_ENVIRONMENT=Production
+
