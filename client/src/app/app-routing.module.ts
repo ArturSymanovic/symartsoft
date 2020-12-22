@@ -5,6 +5,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
 import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'test-errors', component: TestErrorsComponent },
+  { path: 'not-found', component: NotFoundComponent },
   { path: '**', component: HomeComponent, pathMatch: 'full' }
 ];
 
