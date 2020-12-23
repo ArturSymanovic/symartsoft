@@ -13,7 +13,7 @@
   <!-- <a mat-button routerLink="/test-errors">
     TEST ERRORS
   </a> -->
-  <button mat-button [matMenuTriggerFor]="menu" *ngIf="(authService.currentUser$ | async)" class="nav-link">
+  <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(authService.currentUser$ | async)" class="nav-link">
     <mat-icon class="nav-icon">account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
@@ -29,5 +29,8 @@
         <span class="menu-item-text">SIGN OUT</span>
       </a>
   </mat-menu>
+  <button mat-icon-button class="nav-link">
+    <mat-icon class="nav-icon">settings</mat-icon>
+  </button>
 </mat-toolbar>
 
