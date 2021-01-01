@@ -49,8 +49,7 @@ namespace API
             try
             {
                 Log.Information("Application Starting Up...");
-                CreateHostBuilder(args).Build().Run();
-                
+                CreateHostBuilder(args).Build().Run();                
             }
             catch (Exception ex)
             {

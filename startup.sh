@@ -25,11 +25,14 @@ cat /app/crt1.txt | tr [:space:] '\n' | cat >> /app/crt11.txt
 cat /app/crt2.txt | tr [:space:] '\n' | cat >> /app/crt22.txt
 cat /app/crt3.txt | tr [:space:] '\n' | cat >> /app/crt33.txt
 
-# combine certificate files into necessary PEM format
+# combine certificate files into necessary PEM format file
 cat /app/begin.txt /app/crt11.txt /app/end.txt /app/begin.txt /app/crt22.txt /app/end.txt /app/begin.txt /app/crt33.txt /app/end.txt >> /etc/ssl/certs/symartsoftcrt.txt
 
-# combine secret file
+# combine certificate key file into necessary PEM format file
 cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt >> /etc/ssl/certs/symartsoftkey.txt
+
+# combine data protection certificate file into necessary PEM format file
+cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt /app/begin.txt /app/crt11.txt /app/end.txt >> /app/DataProtection.txt
 
 service nginx start
 dotnet /app/API.dll

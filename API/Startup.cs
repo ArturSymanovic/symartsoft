@@ -59,26 +59,19 @@ namespace API
             {                
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
-            }
-
-            // Apply database migrations
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-                db.Database.Migrate();
-            }         
+            }     
 
             app.UseRouting();
             app.UseCors(policy => 
             {
                 policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://www.symartsoft.com");
             });
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
