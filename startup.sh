@@ -36,3 +36,4 @@ cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt /app/begin.txt /app
 
 service nginx start
 dotnet /app/API.dll
+echo "dotnet exited with code" $?
