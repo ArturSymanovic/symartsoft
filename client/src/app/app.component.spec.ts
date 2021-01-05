@@ -1,6 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+} from '@angular/material/bottom-sheet';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -10,8 +15,13 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([]), HttpClientModule],
-      providers: [AuthService],
+      imports: [
+        RouterTestingModule.withRoutes([]),
+        HttpClientModule,
+        MatBottomSheetModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [AuthService, MatBottomSheet],
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
@@ -38,6 +48,8 @@ describe('AppComponent', () => {
   it(`#setCurrentUser should call auth services setCurrentUser method`, () => {
     spyOn(fixture.componentInstance.authService, 'setCurrentUser');
     fixture.componentInstance.setCurrentUser();
-    expect(fixture.componentInstance.authService.setCurrentUser).toHaveBeenCalled();
+    expect(
+      fixture.componentInstance.authService.setCurrentUser
+    ).toHaveBeenCalled();
   });
 });
