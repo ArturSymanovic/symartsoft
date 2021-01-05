@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (this.cookieService.getCookieConsent()) {
+        if (this.cookieService.getCookieConsent() === true) {
           gtag('js', new Date());
           gtag('config', 'G-GZK6SGX0XG', {
             page_path: event.urlAfterRedirects,
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.setCurrentUser();
-    if (!this.cookieService.getCookieConsent()) {
+    if (this.cookieService.getCookieConsent() === null) {
       this._bottomSheet.open(CookieBannerComponent, {
         hasBackdrop: false,
         panelClass: `bottom-sheet-w-100`,

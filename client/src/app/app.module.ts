@@ -20,6 +20,7 @@ import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.compo
 import { ServerErrorComponent } from './_sharedcomponents/server-error/server-error.component';
 import { CookieBannerComponent } from './_sharedcomponents/cookie-banner/cookie-banner.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
+import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PrivacyStatementComponent } from './privacy-statement/privacy-statement
     NotFoundComponent,
     ServerErrorComponent,
     CookieBannerComponent,
-    PrivacyStatementComponent
+    PrivacyStatementComponent,
+    ManagePrivacyComponent
   ],
   imports: [
     BrowserModule,

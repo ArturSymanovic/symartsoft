@@ -41,11 +41,10 @@ export class SigninComponent implements OnInit {
       error: (error) => {
         if (Array.isArray(error)) {
           this.validationErrors = error;
-        }
-        else if (error.error){
+        } else if (error.error) {
           this.validationErrors = [];
           this.validationErrors.push(error.error);
-        }       
+        }
       },
     });
   }

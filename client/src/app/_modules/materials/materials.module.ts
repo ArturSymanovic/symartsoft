@@ -8,11 +8,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider'
+import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -26,7 +26,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatInputModule,
     MatDividerModule,
     MatMenuModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSlideToggleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -38,7 +39,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatListModule,
     MatDividerModule,
     MatMenuModule,
-    MatBottomSheetModule
-  ]
+    MatBottomSheetModule,
+    MatSlideToggleModule,
+  ],
 })
-export class MaterialsModule { }
+export class MaterialsModule {}
