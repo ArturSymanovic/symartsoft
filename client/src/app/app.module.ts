@@ -19,6 +19,7 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
 import { ServerErrorComponent } from './_sharedcomponents/server-error/server-error.component';
 import { CookieBannerComponent } from './_sharedcomponents/cookie-banner/cookie-banner.component';
+import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CookieBannerComponent } from './_sharedcomponents/cookie-banner/cookie-
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    CookieBannerComponent
+    CookieBannerComponent,
+    PrivacyStatementComponent
   ],
   imports: [
     BrowserModule,

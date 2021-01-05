@@ -1,11 +1,17 @@
 <div class="cookie-banner">
-    <div class="icon-with-text">
-        <mat-icon color="primary">privacy_tip</mat-icon> 
-        <span style="margin-left: 10px;">Symartsoft uses cookies and browser's local storage to improve visitors experience, collect analytics data and for advertising. <a href="#"> Privacy Statement</a></span>
-    </div>
-    <span class="spacer"></span>
-    <div>
-        <button mat-raised-button color="primary" (click)="accept()">Accept All</button>
-        <button mat-raised-button color="primary" (click)="manage()">Manage Cookies</button>
-    </div>
+  <div class="icon-with-text">
+    <mat-icon color="primary">privacy_tip</mat-icon>
+    <span style="margin-left: 10px; margin-top: 8px">
+      Symartsoft uses cookies and browser's local storage to improve visitors
+      experience, collect analytics data and for advertising.
+      <a routerLink="/privacy-statement"> Privacy Statement</a></span
+    >
+  </div>
+  <span class="spacer"></span>
+  <div>
+    <button mat-raised-button color="primary" (click)="accept()">
+      Accept All
+    </button>
+    <button mat-raised-button color="primary" (click)="manage()">Manage</button>
+  </div>
 </div>

@@ -38,11 +38,11 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.setCurrentUser();
-    if (!this.cookieService.getCookieConsent())
-    {
+    if (!this.cookieService.getCookieConsent()) {
       this._bottomSheet.open(CookieBannerComponent, {
         hasBackdrop: false,
-        panelClass: `bottom-sheet-w-100`
+        panelClass: `bottom-sheet-w-100`,
+        closeOnNavigation: false,
       });
     }
   }
