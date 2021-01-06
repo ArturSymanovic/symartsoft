@@ -41,9 +41,18 @@
       </div>
     </div>
     <mat-divider></mat-divider>
+    <a
+      routerLink="/account-settings"
+      class="color-primary menu-item-link"
+      mat-menu-item
+    >
+      <mat-icon color="primary" class="menu-item-icon">settings</mat-icon>
+      <span class="menu-item-text">Account Settings</span>
+    </a>
+    <mat-divider></mat-divider>
     <a (click)="logout()" class="color-primary menu-item-link" mat-menu-item>
       <mat-icon color="primary" class="menu-item-icon">exit_to_app</mat-icon>
-      <span class="menu-item-text">SIGN OUT</span>
+      <span class="menu-item-text">Sign Out</span>
     </a>
   </mat-menu>
   <button mat-icon-button [matMenuTriggerFor]="menu1" class="nav-link">
@@ -56,7 +65,7 @@
       mat-menu-item
     >
       <mat-icon color="primary" class="menu-item-icon">privacy_tip</mat-icon>
-      <span class="menu-item-text">MANAGE PRIVACY</span>
+      <span class="menu-item-text">Privacy Settings</span>
     </a>
   </mat-menu>
 </mat-toolbar>

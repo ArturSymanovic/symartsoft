@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatMenuModule,
     MatBottomSheetModule,
     MatSlideToggleModule,
+    MatDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -41,6 +43,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatMenuModule,
     MatBottomSheetModule,
     MatSlideToggleModule,
+    MatDialogModule,
   ],
 })
 export class MaterialsModule {}

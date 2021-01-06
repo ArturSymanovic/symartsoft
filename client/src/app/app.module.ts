@@ -21,6 +21,9 @@ import { ServerErrorComponent } from './_sharedcomponents/server-error/server-er
 import { CookieBannerComponent } from './_sharedcomponents/cookie-banner/cookie-banner.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
+import { AccountSettingsComponent } from './auth/account-settings/account-settings.component';
+import { DeleteAccountDialogComponent } from './auth/delete-account-dialog/delete-account-dialog.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.componen
     ServerErrorComponent,
     CookieBannerComponent,
     PrivacyStatementComponent,
-    ManagePrivacyComponent
+    ManagePrivacyComponent,
+    AccountSettingsComponent,
+    DeleteAccountDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,8 @@ import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.componen
     MaterialsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
