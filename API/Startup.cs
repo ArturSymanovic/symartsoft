@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using API.Data;
 using API.Extensions;
 using API.Helpers;
@@ -17,7 +18,7 @@ namespace API
 {
     public class Startup
     {
-        
+
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Env = env;
@@ -30,13 +31,39 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddApplicationServices(Env);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "api", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter into field the word 'Bearer' following by space and JWT",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        },
+                        Scheme = "oauth2",
+                        Name = "Bearer",
+                        In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
+
             });
             services.AddIdentityServices(Env);
         }
@@ -56,13 +83,13 @@ namespace API
 
             //Swagger for API testing during development
             if (env.IsDevelopment())
-            {                
+            {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "api v1"));
-            }     
+            }
 
             app.UseRouting();
-            app.UseCors(policy => 
+            app.UseCors(policy =>
             {
                 policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://www.symartsoft.com");
             });
