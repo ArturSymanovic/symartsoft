@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
 
 import { AccountSettingsComponent } from './account-settings.component';
 
@@ -10,7 +10,7 @@ describe('AccountSettingsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AccountSettingsComponent],
-      imports: [MatDialogModule],
+      imports: [MaterialsModule],
     }).compileComponents();
   });
 

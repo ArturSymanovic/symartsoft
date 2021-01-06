@@ -8,6 +8,7 @@ import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
+import { AuthGuard } from './_guards/auth.guard';
 import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
 import { ServerErrorComponent } from './_sharedcomponents/server-error/server-error.component';
 import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors.component';
@@ -23,7 +24,11 @@ const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'privacy-statement', component: PrivacyStatementComponent },
   { path: 'manage-privacy', component: ManagePrivacyComponent },
-  { path: 'account-settings', component: AccountSettingsComponent },
+  {
+    path: 'account-settings',
+    component: AccountSettingsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
