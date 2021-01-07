@@ -1,8 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from '../_modules/materials/materials.module';
-
 import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
@@ -10,11 +8,7 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientModule,
-        MaterialsModule,
-      ],
+      imports: [HttpClientModule, MaterialsModule],
     });
     guard = TestBed.inject(AuthGuard);
   });

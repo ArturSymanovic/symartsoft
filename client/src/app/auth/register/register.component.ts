@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -42,8 +42,10 @@ export class RegisterComponent implements OnInit {
       error: (error) => {
         if (Array.isArray(error)) {
           this.validationErrors = error;
-          this.validationErrors = this.validationErrors.filter(v => !v.includes('Username'));
-        }        
+          this.validationErrors = this.validationErrors.filter(
+            (v) => !v.includes('Username')
+          );
+        }
       },
     });
   }

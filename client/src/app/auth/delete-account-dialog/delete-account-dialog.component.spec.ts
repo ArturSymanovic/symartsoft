@@ -4,8 +4,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
-import { AuthService } from 'src/app/_services/auth.service';
-
 import { DeleteAccountDialogComponent } from './delete-account-dialog.component';
 
 describe('DeleteAccountDialogComponent', () => {

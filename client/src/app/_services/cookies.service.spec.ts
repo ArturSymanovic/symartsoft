@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { CookiesService } from './cookies.service';
 
 describe('CookiesService', () => {

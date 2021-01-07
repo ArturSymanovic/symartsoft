@@ -5,14 +5,15 @@ import { CookiesService } from 'src/app/_services/cookies.service';
 @Component({
   selector: 'app-cookie-banner',
   templateUrl: './cookie-banner.component.html',
-  styleUrls: ['./cookie-banner.component.css']
+  styleUrls: ['./cookie-banner.component.css'],
 })
 export class CookieBannerComponent implements OnInit {
+  constructor(
+    private _bottomSheetRef: MatBottomSheetRef<CookieBannerComponent>,
+    private cookieService: CookiesService
+  ) {}
 
-  constructor(private _bottomSheetRef: MatBottomSheetRef<CookieBannerComponent>, private cookieService: CookiesService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   accept(): void {
     this.cookieService.setCookieConsent(true);
@@ -24,5 +25,4 @@ export class CookieBannerComponent implements OnInit {
     this.cookieService.deleteAll();
     this._bottomSheetRef.dismiss();
   }
-
 }

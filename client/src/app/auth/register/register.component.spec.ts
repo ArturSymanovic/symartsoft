@@ -8,7 +8,6 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
-
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
@@ -23,12 +22,10 @@ describe('RegisterComponent', () => {
         ReactiveFormsModule,
         HttpClientModule,
         MaterialsModule,
-        RouterTestingModule.withRoutes([
-        ])
+        RouterTestingModule.withRoutes([]),
       ],
-      declarations: [ RegisterComponent ]
-    })
-    .compileComponents();
+      declarations: [RegisterComponent],
+    }).compileComponents();
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
@@ -40,9 +37,15 @@ describe('RegisterComponent', () => {
   });
 
   it(`should initialize and render sign in form`, async () => {
-    const emailField = await loader.getHarness(MatInputHarness.with({selector: `input[FormControlName='email']`}));
-    const passwordField = await loader.getHarness(MatInputHarness.with({selector: `input[FormControlName='password']`}));
-    const registerButton = await loader.getHarness(MatButtonHarness.with({text: `Register`}));
+    const emailField = await loader.getHarness(
+      MatInputHarness.with({ selector: `input[FormControlName='email']` })
+    );
+    const passwordField = await loader.getHarness(
+      MatInputHarness.with({ selector: `input[FormControlName='password']` })
+    );
+    const registerButton = await loader.getHarness(
+      MatButtonHarness.with({ text: `Register` })
+    );
     expect(emailField).toBeTruthy();
     expect(passwordField).toBeTruthy();
     expect(registerButton).toBeTruthy();
@@ -50,9 +53,13 @@ describe('RegisterComponent', () => {
 
   it(`#sign in button should call login method`, async () => {
     spyOn(fixture.componentInstance, 'register');
-    fixture.componentInstance.registerForm.controls.email.setValue("test@test");
-    fixture.componentInstance.registerForm.controls.password.setValue("password");
-    const registerButton = await loader.getHarness(MatButtonHarness.with({text: `Register`}));
+    fixture.componentInstance.registerForm.controls.email.setValue('test@test');
+    fixture.componentInstance.registerForm.controls.password.setValue(
+      'password'
+    );
+    const registerButton = await loader.getHarness(
+      MatButtonHarness.with({ text: `Register` })
+    );
     await registerButton.click();
     expect(fixture.componentInstance.register).toHaveBeenCalled();
   });

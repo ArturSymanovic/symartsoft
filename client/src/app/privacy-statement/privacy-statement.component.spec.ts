@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PrivacyStatementComponent } from './privacy-statement.component';
 
 describe('PrivacyStatementComponent', () => {
@@ -8,9 +7,8 @@ describe('PrivacyStatementComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrivacyStatementComponent ]
-    })
-    .compileComponents();
+      declarations: [PrivacyStatementComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

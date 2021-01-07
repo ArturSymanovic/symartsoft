@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { browser } from 'protractor';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({

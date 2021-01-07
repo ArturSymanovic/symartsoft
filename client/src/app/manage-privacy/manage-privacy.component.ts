@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-  MatBottomSheet,
-  MatBottomSheetRef,
-} from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookiesService } from '../_services/cookies.service';
-import { CookieBannerComponent } from '../_sharedcomponents/cookie-banner/cookie-banner.component';
 
 @Component({
   selector: 'app-manage-privacy',

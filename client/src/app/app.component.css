@@ -1,11 +1,11 @@
 .sticky {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    z-index: 10000;
-    width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 10000;
+  width: 100%;
 }
 
 .nav-margin {
-    height: 56px;
+  height: 56px;
 }

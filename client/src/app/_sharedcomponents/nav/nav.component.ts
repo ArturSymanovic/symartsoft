@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/_services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-nav',
@@ -13,12 +13,12 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.snackbar.open('Logged Out', '', {
       duration: 2000,
       horizontalPosition: 'right',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
     });
   }
 }

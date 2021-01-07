@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MaterialsModule } from '../_modules/materials/materials.module';
-
 import { ManagePrivacyComponent } from './manage-privacy.component';
 
 describe('ManagePrivacyComponent', () => {
