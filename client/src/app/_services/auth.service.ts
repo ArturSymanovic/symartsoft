@@ -9,13 +9,13 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSource = new ReplaySubject<User>(1);
+  private currentUserSource = new ReplaySubject<User | null>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient, private apiRoutes: ApiRoutesService) {}
 
   register(model: any) {
-    return this.http.post(this.apiRoutes.registerUrl(), model).pipe(
+    return this.http.post<User>(this.apiRoutes.registerUrl(), model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(model: any) {
-    return this.http.post(this.apiRoutes.loginUrl(), model).pipe(
+    return this.http.post<User>(this.apiRoutes.loginUrl(), model).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
@@ -38,7 +38,7 @@ export class AuthService {
     );
   }
 
-  setCurrentUser(user: User) {
+  setCurrentUser(user: User | null) {
     this.currentUserSource.next(user);
   }
 

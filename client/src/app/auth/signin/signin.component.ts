@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
-  signInForm: FormGroup;
+  signInForm: FormGroup = new FormGroup({});
   validationErrors: string[] = [];
   returnUrl: string = ``;
   constructor(

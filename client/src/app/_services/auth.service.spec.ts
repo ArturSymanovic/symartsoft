@@ -24,7 +24,7 @@ describe('AuthService', () => {
   });
 
   it('#register should call the http post method once', () => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
@@ -39,7 +39,7 @@ describe('AuthService', () => {
   });
 
   it('#register should save user object to local storage', () => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
@@ -52,14 +52,14 @@ describe('AuthService', () => {
   // if the done function is not executed the test will fail with timeout error
   // this done function needed for the case where the observable was never updated
   it('#register should update value in the current user observable', (done) => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
     httpClientSpy.post.and.returnValue(of(userStub));
     authService.register(null).subscribe();
     authService.currentUser$.subscribe({
-      next: (user: User) => {
+      next: (user: User | null) => {
         expect(user).toEqual(userStub);
         done();
       },
@@ -78,7 +78,7 @@ describe('AuthService', () => {
   });
 
   it('#login should call the http post method once', () => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
@@ -93,7 +93,7 @@ describe('AuthService', () => {
   });
 
   it('#login should save user object to local storage', () => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
@@ -106,14 +106,14 @@ describe('AuthService', () => {
   // if the done function is not executed the test will fail with timeout error
   // this done function needed for the case where the observable was never updated
   it('#login should update value in the current user observable', (done) => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
     httpClientSpy.post.and.returnValue(of(userStub));
     authService.login(null).subscribe();
     authService.currentUser$.subscribe({
-      next: (user: User) => {
+      next: (user: User | null) => {
         expect(user).toEqual(userStub);
         done();
       },
@@ -139,7 +139,7 @@ describe('AuthService', () => {
   it('#logout should update value in the current user observable to null', (done) => {
     authService.logout();
     authService.currentUser$.subscribe({
-      next: (user: User) => {
+      next: (user: User | null) => {
         expect(user).toBeNull();
         done();
       },
@@ -147,14 +147,14 @@ describe('AuthService', () => {
   });
 
   it('#setCurrentUser should update value in the current user observable', (done) => {
-    const userStub: User = {
+    const userStub: User | null = {
       email: 'test1@example.com',
       token: 'asdasdgdfghdfg',
     };
 
     authService.setCurrentUser(userStub);
     authService.currentUser$.subscribe({
-      next: (user: User) => {
+      next: (user: User | null) => {
         expect(user).toEqual(userStub);
         done();
       },

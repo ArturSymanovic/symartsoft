@@ -10,7 +10,7 @@ import { CookiesService } from '../_services/cookies.service';
   styleUrls: ['./manage-privacy.component.css'],
 })
 export class ManagePrivacyComponent implements OnInit {
-  privacySettingsForm: FormGroup;
+  privacySettingsForm: FormGroup = new FormGroup({});
   constructor(
     private cookieService: CookiesService,
     private _bottomSheet: MatBottomSheet,

@@ -47,7 +47,7 @@ export class CookiesService {
   getAll(): any {
     return decodeURIComponent(document.cookie)
       .split(';')
-      .reduce((cookies, cookie) => {
+      .reduce((cookies: any, cookie) => {
         const [name, value] = cookie.split('=').map((c) => c.trim());
         cookies[name] = value;
         return cookies;
@@ -85,7 +85,12 @@ export class CookiesService {
 
   getCookieConsent(): boolean | null {
     const now = new Date();
-    const consentObject = JSON.parse(localStorage.getItem('cookieConsent'));
+    const consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+      this.deleteAll();
+      return null;
+    }
+    const consentObject = JSON.parse(consent as string);
     if (!consentObject) {
       this.deleteAll();
       return null;
