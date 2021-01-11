@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-signin',
@@ -11,14 +11,19 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class SigninComponent implements OnInit {
   signInForm: FormGroup;
   validationErrors: string[] = [];
+  returnUrl: string = ``;
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.route.queryParams.subscribe(
+      (params) => (this.returnUrl = params['returnUrl'] || '/')
+    );
   }
 
   initializeForm(): void {
@@ -31,7 +36,7 @@ export class SigninComponent implements OnInit {
   login() {
     this.authService.login(this.signInForm.value).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl(this.returnUrl);
         this.snackbar.open('Logged In', '', {
           duration: 2000,
           horizontalPosition: 'right',

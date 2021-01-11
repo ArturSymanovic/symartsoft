@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialsModule } from '../_modules/materials/materials.module';
 import { AuthGuard } from './auth.guard';
 
@@ -8,7 +9,7 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, MaterialsModule],
+      imports: [HttpClientModule, MaterialsModule, RouterTestingModule],
     });
     guard = TestBed.inject(AuthGuard);
   });

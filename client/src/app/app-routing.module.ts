@@ -28,12 +28,18 @@ const routes: Routes = [
     path: 'account-settings',
     component: AccountSettingsComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      relativeLinkResolution: 'legacy',
+      onSameUrlNavigation: 'reload',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
