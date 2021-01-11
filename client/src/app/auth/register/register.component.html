@@ -23,6 +23,19 @@
         Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
+    <!-- <div class="checkbox">
+      <mat-checkbox formControlName="privacyAgreement" color="primary">
+        I agree to the privacy terms and conditions
+      </mat-checkbox>
+      <div class="checkbox-error">
+        <mat-error
+          class="mat-error"
+          *ngIf="registerForm.controls.privacyAgreement.hasError('required')"
+        >
+          Privacy terms agreement is <strong>required</strong>
+        </mat-error>
+      </div>
+    </div> -->
     <button
       mat-raised-button
       color="primary"
@@ -35,6 +48,12 @@
       <mat-error *ngFor="let error of validationErrors" class="error-summary">{{
         error
       }}</mat-error>
+      
     </div>
+    <hr>
+    <p class="privacy-notice">
+      By signing up you agree for your data to be used as described in our
+      <a routerLink="/privacy-statement">Privacy Statement</a>.
+    </p>
   </form>
 </div>

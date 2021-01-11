@@ -20,10 +20,30 @@ form {
 }
 
 .error-summary {
-  font-size: 80%;
+  font-size: 75%;
   padding-top: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 button {
   margin-bottom: 5px;
+}
+
+.checkbox {
+  margin-bottom: 10px;
+}
+
+.checkbox-error {
+  font-size: 75%;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.privacy-notice {
+  font-size: 75%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 10px;
+  margin-bottom: 0px;;
 }

@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBottomSheetModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -44,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBottomSheetModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
 })
 export class MaterialsModule {}
