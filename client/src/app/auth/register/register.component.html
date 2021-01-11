@@ -13,14 +13,14 @@
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="registerForm.controls.email.hasError('required')">
-        Email is <strong>required</strong>
+        Email is required
       </mat-error>
     </mat-form-field>
     <mat-form-field class="form-field" appearance="fill" color="primary">
       <mat-label>Password</mat-label>
       <input type="password" matInput formControlName="password" />
       <mat-error *ngIf="registerForm.controls.password.hasError('required')">
-        Password is <strong>required</strong>
+        Password is required
       </mat-error>
     </mat-form-field>
     <!-- <div class="checkbox">

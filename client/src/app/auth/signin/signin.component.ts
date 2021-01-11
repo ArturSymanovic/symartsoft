@@ -21,8 +21,8 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.route.queryParams.subscribe(
-      (params) => (this.returnUrl = params['returnUrl'] || '/')
+    this.route.queryParamMap.subscribe(
+      (paramMap) => (this.returnUrl = paramMap.get(`returnUrl`) || '/')
     );
   }
 

@@ -41,6 +41,7 @@ button {
 }
 
 .privacy-notice {
+  text-align: center;
   font-size: 75%;
   padding-left: 12px;
   padding-right: 12px;

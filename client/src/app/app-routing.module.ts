@@ -8,6 +8,7 @@ import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
+import { AnonGuard } from './_guards/anon.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
 import { ServerErrorComponent } from './_sharedcomponents/server-error/server-error.component';
@@ -17,8 +18,18 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'signin',
+    component: SigninComponent,
+    canActivate: [AnonGuard],
+    runGuardsAndResolvers: 'always',
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [AnonGuard],
+    runGuardsAndResolvers: 'always',
+  },
   { path: 'test-errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
