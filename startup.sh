@@ -34,6 +34,9 @@ cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt >> /etc/ssl/certs/s
 # combine data protection certificate file into necessary PEM format file
 cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt /app/begin.txt /app/crt11.txt /app/end.txt >> /app/DataProtection.txt
 
+cp /app/DataProtection.txt /usr/local/share/ca-certificates/DataProtection.crt
+update-ca-certificates
+
 service nginx start
 dotnet /app/API.dll
 echo "dotnet exited with code" $?
