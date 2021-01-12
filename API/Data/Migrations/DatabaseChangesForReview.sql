@@ -167,7 +167,31 @@ GO
 IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201203172158_AddIdentity')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20201203172158_AddIdentity', N'5.0.0');
+    VALUES (N'20201203172158_AddIdentity', N'5.0.1');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201228195114_DataProtectionConfiguration')
+BEGIN
+    CREATE TABLE [DataProtectionKeys] (
+        [Id] int NOT NULL IDENTITY,
+        [FriendlyName] nvarchar(max) NULL,
+        [Xml] nvarchar(max) NULL,
+        CONSTRAINT [PK_DataProtectionKeys] PRIMARY KEY ([Id])
+    );
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20201228195114_DataProtectionConfiguration')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20201228195114_DataProtectionConfiguration', N'5.0.1');
 END;
 GO
 

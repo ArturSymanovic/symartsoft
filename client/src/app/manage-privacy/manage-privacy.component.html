@@ -1,0 +1,44 @@
+<div class="content-container">
+  <h1>Privacy Settings</h1>
+  <p>
+    This page allows you to control the data you share with Symartsoft. For more
+    information about the data we collect and process please read our
+    <a routerLink="/privacy-statement">Privacy Statement</a>
+  </p>
+  <form [formGroup]="privacySettingsForm">
+    <hr />
+    <h2>Required</h2>
+    <p>
+      Symartsoft uses your device's local storage and/or cookies to perform
+      essential portal functions. This includes remembering your preferences,
+      determining your screen size, signing you in, measuring performance and
+      improving user experience. This collected data is necessary for the portal
+      to be able to operate.
+    </p>
+    <mat-slide-toggle
+      color="primary"
+      checked="true"
+      disabled="true"
+    ></mat-slide-toggle>
+    <hr />
+    <h2>Analytics Cookies</h2>
+    <p>
+      Symartsoft allows third parties to use analytics cookies to collect data
+      on how you use our portal so we can improve our services, user experience,
+      personalize content and advertise products. Third parties can use these
+      cookies for developing and improving their products, which they may use on
+      websites that are not owned or operated by Symartsoft. For example, they
+      are used to gather information about which pages you visit, where you
+      click in order to accomplish specific result. We may use some analytics
+      cookies for advertising.
+    </p>
+    <mat-slide-toggle
+      color="primary"
+      formControlName="cookieConsent"
+    ></mat-slide-toggle>
+    <hr />
+    <button mat-raised-button color="primary" (click)="saveSettings()">
+      Save
+    </button>
+  </form>
+</div>

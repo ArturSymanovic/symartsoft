@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from 'src/app/_services/auth.service';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
-import { MatMenuHarness } from '@angular/material/menu/testing'
+import { MatMenuHarness } from '@angular/material/menu/testing';
 
 describe('NavComponent', () => {
   let fixture: ComponentFixture<NavComponent>;
@@ -90,7 +90,7 @@ describe('NavComponent', () => {
       .map((l) => l.nativeElement.innerText);
     expect(
       hrefs.findIndex((l: string) => {
-        return l.includes('SIGN OUT');
+        return l.includes('Sign Out');
       })
     ).not.toEqual(-1);
   });
@@ -108,7 +108,7 @@ describe('NavComponent', () => {
       .queryAll(By.css('a'))
       .map((l) => l.nativeElement)
       .filter((l) => {
-        return l.innerText.includes('SIGN OUT');
+        return l.innerText.includes('Sign Out');
       })[0];
     href.click();
     expect(fixture.componentInstance.authService.logout).toHaveBeenCalled();

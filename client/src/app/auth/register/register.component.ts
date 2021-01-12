@@ -7,10 +7,10 @@ import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+  registerForm: FormGroup = new FormGroup({});
   validationErrors: string[] = [];
   constructor(
     private authService: AuthService,
@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
   initializeForm(): void {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+      //privacyAgreement: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
@@ -42,8 +43,10 @@ export class RegisterComponent implements OnInit {
       error: (error) => {
         if (Array.isArray(error)) {
           this.validationErrors = error;
-          this.validationErrors = this.validationErrors.filter(v => !v.includes('Username'));
-        }        
+          this.validationErrors = this.validationErrors.filter(
+            (v) => !v.includes('Username')
+          );
+        }
       },
     });
   }

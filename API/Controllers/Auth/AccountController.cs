@@ -6,6 +6,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers.Auth
 {
@@ -31,7 +33,7 @@ namespace API.Controllers.Auth
             var result = await UserManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-            
+
             var userDto = Mapper.Map<UserDto>(user);
             userDto.Token = TokenService.CreateToken(user);
             return userDto;
@@ -46,10 +48,23 @@ namespace API.Controllers.Auth
             var result = await SignInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded) return Unauthorized("Invalid Credentials");
-            
+
             var userDto = Mapper.Map<UserDto>(user);
             userDto.Token = TokenService.CreateToken(user);
             return userDto;
+        }
+
+        [Authorize]
+        [HttpDelete("delete")]
+        public async Task<ActionResult> DeleteOwnAccount()
+        {
+            var currentUser = await UserManager.Users.FirstOrDefaultAsync(u => u.UserName == User.GetUserName());
+            var result = await UserManager.DeleteAsync(currentUser);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
         }
 
         // [HttpPost("deleteallusers")]

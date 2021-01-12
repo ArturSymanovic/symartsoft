@@ -1,17 +1,20 @@
 using API.Models.Auth;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
     public class DataContext : IdentityDbContext<AppUser, AppRole, string, AppUserClaim,
-        AppUserRole, AppUserLogin, AppRoleClaim, AppUserToken>
+        AppUserRole, AppUserLogin, AppRoleClaim, AppUserToken>, IDataProtectionKeyContext
     {
         public DataContext(DbContextOptions options) : base(options)
         {
         }
 
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
+
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

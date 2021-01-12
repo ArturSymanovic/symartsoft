@@ -8,10 +8,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider'
+import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -24,7 +27,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatInputModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatCheckboxModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -35,7 +42,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatListModule,
     MatDividerModule,
-    MatMenuModule
-  ]
+    MatMenuModule,
+    MatBottomSheetModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatCheckboxModule,
+  ],
 })
-export class MaterialsModule { }
+export class MaterialsModule {}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-signin',
@@ -9,16 +9,21 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
-  signInForm: FormGroup;
+  signInForm: FormGroup = new FormGroup({});
   validationErrors: string[] = [];
+  returnUrl: string = ``;
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private snackbar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.route.queryParamMap.subscribe(
+      (paramMap) => (this.returnUrl = paramMap.get(`returnUrl`) || '/')
+    );
   }
 
   initializeForm(): void {
@@ -31,7 +36,7 @@ export class SigninComponent implements OnInit {
   login() {
     this.authService.login(this.signInForm.value).subscribe({
       next: (response) => {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl(this.returnUrl);
         this.snackbar.open('Logged In', '', {
           duration: 2000,
           horizontalPosition: 'right',
@@ -41,11 +46,10 @@ export class SigninComponent implements OnInit {
       error: (error) => {
         if (Array.isArray(error)) {
           this.validationErrors = error;
-        }
-        else if (error.error){
+        } else if (error.error) {
           this.validationErrors = [];
           this.validationErrors.push(error.error);
-        }       
+        }
       },
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/_services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -9,16 +10,21 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 })
 export class NavComponent implements OnInit {
   title = 'Symartsoft';
-  constructor(public authService: AuthService, private snackbar: MatSnackBar) {}
+  constructor(
+    public authService: AuthService,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.snackbar.open('Logged Out', '', {
       duration: 2000,
       horizontalPosition: 'right',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
     });
+    this.router.navigateByUrl(`/`);
   }
 }

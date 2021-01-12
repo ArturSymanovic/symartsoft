@@ -4,12 +4,12 @@ import { MaterialsModule } from '../_modules/materials/materials.module';
 import { ErrorInterceptor } from './error.interceptor';
 
 describe('ErrorInterceptor', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, MaterialsModule],
-    providers: [
-      ErrorInterceptor
-      ]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, MaterialsModule],
+      providers: [ErrorInterceptor],
+    })
+  );
 
   it('should be created', () => {
     const interceptor: ErrorInterceptor = TestBed.inject(ErrorInterceptor);

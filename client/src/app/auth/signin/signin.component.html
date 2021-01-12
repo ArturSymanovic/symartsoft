@@ -1,29 +1,41 @@
 <div class="flex-container">
-    <form [formGroup]="signInForm" >
-        <h1 style="text-align: center;">Sign In</h1>
-        <mat-form-field class="form-field" appearance="fill"  color="primary">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" autocomplete="off">
-          <mat-error *ngIf="signInForm.controls.email.hasError('email') && !signInForm.controls.email.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="signInForm.controls.email.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="form-field" appearance="fill" color="primary">
-          <mat-label>Password</mat-label>
-          <input type="password" matInput formControlName="password">
-          <mat-error *ngIf="signInForm.controls.password.hasError('required')">
-            Password is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="login();" [disabled]="!signInForm.valid">Sign In</button>   
-        <div *ngIf="validationErrors.length > 0">
-          <mat-error *ngFor="let error of validationErrors" class="error-summary
-          ">{{error}}</mat-error>
-        </div> 
-        <p>Don't have an account? <a routerLink="/register">Register</a></p>   
-      </form>
+  <form [formGroup]="signInForm">
+    <h1 style="text-align: center">Sign In</h1>
+    <mat-form-field class="form-field" appearance="fill" color="primary">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" autocomplete="off" />
+      <mat-error
+        *ngIf="
+          signInForm.controls.email.hasError('email') &&
+          !signInForm.controls.email.hasError('required')
+        "
+      >
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="signInForm.controls.email.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill" color="primary">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <mat-error *ngIf="signInForm.controls.password.hasError('required')">
+        Password is required
+      </mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="login()"
+      [disabled]="!signInForm.valid"
+    >
+      Sign In
+    </button>
+    <div *ngIf="validationErrors.length > 0">
+      <mat-error *ngFor="let error of validationErrors" class="error-summary">{{
+        error
+      }}</mat-error>
+    </div>
+    <p>Don't have an account? <a routerLink="/register">Register</a></p>
+  </form>
 </div>
-
