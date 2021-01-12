@@ -40,15 +40,23 @@ namespace API.Extensions
                 var db = serviceProvider.GetRequiredService<DataContext>();
                 db.Database.Migrate();
             }
-
             var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadWrite);            
-            X509Certificate2 cert = new X509Certificate2("certificate.pfx");      
-            store.Add(cert);
-            services.AddDataProtection()
-                .PersistKeysToDbContext<DataContext>()
-                .ProtectKeysWithCertificate(cert);
-            store.Close();
+            try
+            {                
+                store.Open(OpenFlags.ReadWrite);            
+                X509Certificate2 cert = new X509Certificate2("/app/certificate.pfx");      
+                store.Add(cert);
+                services.AddDataProtection()
+                    .PersistKeysToDbContext<DataContext>()
+                    .ProtectKeysWithCertificate(cert);
+                store.Close();
+            }
+            catch (System.Exception)
+            {
+                
+                store.Close();
+            }
+
             return services;
         }
     }
