@@ -42,14 +42,13 @@ namespace API.Extensions
             }
 
             var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadWrite);
-            //X509Certificate2 cert = new X509Certificate2(X509Certificate.CreateFromCertFile("DataProtection.txt"));
-            //store.Add(cert);
+            store.Open(OpenFlags.ReadWrite);            
+            X509Certificate2 cert = new X509Certificate2("certificate.pfx");      
+            store.Add(cert);
             services.AddDataProtection()
                 .PersistKeysToDbContext<DataContext>()
-                .ProtectKeysWithCertificate(store.Certificates[0]);
+                .ProtectKeysWithCertificate(cert);
             store.Close();
-
             return services;
         }
     }

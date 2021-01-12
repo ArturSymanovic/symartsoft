@@ -31,11 +31,8 @@ cat /app/begin.txt /app/crt11.txt /app/end.txt /app/begin.txt /app/crt22.txt /ap
 # combine certificate key file into necessary PEM format file
 cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt >> /etc/ssl/certs/symartsoftkey.txt
 
-# combine data protection certificate file into necessary PEM format file
-cat /app/beginkey.txt /app/symartsoftkey.txt /app/endkey.txt /app/begin.txt /app/crt11.txt /app/end.txt >> /app/DataProtection.txt
-
-cp /app/DataProtection.txt /usr/local/share/ca-certificates/DataProtection.crt
-update-ca-certificates
+# download data protection certificate
+az keyvault secret download --file /app/certificate.pfx --name DataProtectionCertificate --vault-name SymartsoftKV
 
 service nginx start
 dotnet /app/API.dll
