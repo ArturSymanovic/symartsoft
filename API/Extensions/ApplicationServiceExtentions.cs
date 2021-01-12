@@ -40,17 +40,19 @@ namespace API.Extensions
                 db.Database.Migrate();
             }
 
-            //var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            //store.Open(OpenFlags.ReadWrite);
-            //store.Certificates.ImportFromPemFile("./DataProtection.txt");
+            var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadWrite);
+            X509Certificate2 cert = new X509Certificate2(X509Certificate.CreateFromCertFile("./DataProtection.txt"));
+            store.Certificates.Add(cert);
+            
             //Log.Warning("Certificate store count: " + store.Certificates.Count.ToString());
             //Log.Warning("store.Certificates[0].GetRawCertDataString(): " + store.Certificates[0].GetRawCertDataString());  
             //Log.Warning("store.Certificates[0].SubjectName: " + store.Certificates[0].SubjectName);
-            X509Certificate2 cert = new X509Certificate2(X509Certificate.CreateFromCertFile("./DataProtection.txt"));
+            
             services.AddDataProtection()
                 .PersistKeysToDbContext<DataContext>()
-                .ProtectKeysWithCertificate((X509Certificate2)cert);
-            //store.Close();
+                .ProtectKeysWithCertificate(store.Certificates[0]);
+            store.Close();
 
             return services;
         }
