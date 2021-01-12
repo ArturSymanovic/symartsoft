@@ -40,16 +40,17 @@ namespace API.Extensions
                 db.Database.Migrate();
             }
 
-            var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadWrite);
-            store.Certificates.ImportFromPemFile("./DataProtection.txt");
-            Log.Warning("Certificate store count: " + store.Certificates.Count.ToString());
-            Log.Warning("store.Certificates[0].GetRawCertDataString(): " + store.Certificates[0].GetRawCertDataString());  
-            Log.Warning("store.Certificates[0].SubjectName: " + store.Certificates[0].SubjectName);
+            //var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
+            //store.Open(OpenFlags.ReadWrite);
+            //store.Certificates.ImportFromPemFile("./DataProtection.txt");
+            //Log.Warning("Certificate store count: " + store.Certificates.Count.ToString());
+            //Log.Warning("store.Certificates[0].GetRawCertDataString(): " + store.Certificates[0].GetRawCertDataString());  
+            //Log.Warning("store.Certificates[0].SubjectName: " + store.Certificates[0].SubjectName);
+            X509Certificate2 cert = new X509Certificate2(X509Certificate.CreateFromCertFile("./DataProtection.txt"));
             services.AddDataProtection()
                 .PersistKeysToDbContext<DataContext>()
-                .ProtectKeysWithCertificate(store.Certificates[0]);
-            store.Close();
+                .ProtectKeysWithCertificate((X509Certificate2)cert);
+            //store.Close();
 
             return services;
         }
