@@ -46,14 +46,14 @@ namespace API.Extensions
                 store.Open(OpenFlags.ReadWrite);            
                 X509Certificate2 cert = new X509Certificate2("/app/certificate.pfx");      
                 store.Add(cert);
+                Log.Warning(store.Certificates.Count.ToString());
                 services.AddDataProtection()
                     .PersistKeysToDbContext<DataContext>()
                     .ProtectKeysWithCertificate(cert);
                 store.Close();
             }
             catch (System.Exception)
-            {
-                
+            {               
                 store.Close();
             }
 
