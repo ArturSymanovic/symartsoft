@@ -43,7 +43,7 @@ cat /app/beginkey.txt /app/DpKey1.txt /app/endkey.txt >> /app/DpKey2.txt
 cat /app/begin.txt /app/DpCert1.txt /app/end.txt >> /app/DpCert2.txt
 
 # create pfx certificate for data protection
-openssl pkcs12 -export -out /app/certificate.pfx -inkey /app/DpKey2.txt -in /app/DpCert2.txt
+openssl pkcs12 -export -out /app/certificate.pfx -inkey /app/DpKey2.txt -in /app/DpCert2.txt -passout pass:
 
 service nginx start
 dotnet /app/API.dll
