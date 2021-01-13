@@ -57,6 +57,7 @@ export class CookiesService {
   delete(cname: string): void {
     document.cookie =
       cname + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie =
       cname + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.symartsoft.com';
   }
 
