@@ -21,6 +21,7 @@ namespace API
 
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+
             Env = env;
             Configuration = configuration;
         }
@@ -69,7 +70,7 @@ namespace API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             //Error handling and logging
             app.UseMiddleware<ExceptionMiddleware>();
@@ -104,6 +105,13 @@ namespace API
                 endpoints.MapControllers();
                 endpoints.MapFallbackToController("Index", "Fallback");
             });
+            applicationLifetime.ApplicationStopping.Register(OnShutDown);
+        }
+
+        private void OnShutDown()
+        {
+            Log.Warning("Custom ApplicationStopping registered method is called");
+            Log.CloseAndFlush();
         }
     }
 }

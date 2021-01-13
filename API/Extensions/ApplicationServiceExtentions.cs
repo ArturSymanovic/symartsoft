@@ -22,13 +22,16 @@ namespace API.Extensions
             services.AddScoped<ITokenService, TokenService>();
 
             var connectionString = "";
+            var dataProtectionCertificatePath = "";
             if (env.IsDevelopment())
             {
                 connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_dev");
+                dataProtectionCertificatePath="./certificate.pfx";
             }
             if (env.IsProduction())
             {
                 connectionString = connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_prod");
+                dataProtectionCertificatePath="/app/certificate.pfx";
             }
             services.AddDbContext<DataContext>(options =>
             {
@@ -41,21 +44,14 @@ namespace API.Extensions
                 db.Database.Migrate();
             }
             var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            try
-            {                
-                store.Open(OpenFlags.ReadWrite);            
-                X509Certificate2 cert = new X509Certificate2("/app/certificate.pfx");      
-                store.Add(cert);
-                Log.Warning(store.Certificates.Count.ToString());
-                services.AddDataProtection()
-                    .PersistKeysToDbContext<DataContext>()
-                    .ProtectKeysWithCertificate(cert);
-                store.Close();
-            }
-            catch (System.Exception)
-            {               
-                store.Close();
-            }
+             
+            store.Open(OpenFlags.ReadWrite);            
+            X509Certificate2 cert = new X509Certificate2(dataProtectionCertificatePath);      
+            store.Add(cert);
+            services.AddDataProtection()
+                .PersistKeysToDbContext<DataContext>()
+                .ProtectKeysWithCertificate(cert);
+            store.Close();
 
             return services;
         }
