@@ -93,10 +93,6 @@ export class CookiesService {
       return null;
     }
     const consentObject = JSON.parse(consent as string);
-    if (!consentObject) {
-      this.deleteAll();
-      return null;
-    }
     if (now.getTime() > consentObject.expiry) {
       this.deleteAll();
       localStorage.removeItem('cookieConsent');

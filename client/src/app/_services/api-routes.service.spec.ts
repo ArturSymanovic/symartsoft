@@ -25,6 +25,12 @@ describe('ApiRoutesService', () => {
     }).not.toThrowError();
   });
 
+  it('#deleteUrl should return valid url', () => {
+    expect(() => {
+      new URL(service.deleteUrl());
+    }).not.toThrowError();
+  });
+
   it('#error400Url should return valid url', () => {
     expect(() => {
       new URL(service.error400Url());
