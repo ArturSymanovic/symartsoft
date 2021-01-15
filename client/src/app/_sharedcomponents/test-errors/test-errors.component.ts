@@ -17,35 +17,30 @@ export class TestErrorsComponent implements OnInit {
 
   getGeneric400error() {
     this.http.get(this.apiRoutes.error400Url()).subscribe({
-      next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
   }
 
   getValidation400error() {
     this.http.post(this.apiRoutes.errorValidation400Url(), {}).subscribe({
-      next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
   }
 
   get401error() {
     this.http.get(this.apiRoutes.error401Url()).subscribe({
-      next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
   }
 
   get404error() {
     this.http.get(this.apiRoutes.error404Url()).subscribe({
-      next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
   }
 
   get500error() {
     this.http.get(this.apiRoutes.error500Url()).subscribe({
-      next: (response) => console.log(response),
       error: (error) => console.log(error),
     });
   }

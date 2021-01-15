@@ -70,7 +70,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 horizontalPosition: 'right',
                 verticalPosition: 'bottom',
               });
-              console.log(error);
+              //console.log(error);
               break;
           }
         }

@@ -1,8 +1,13 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { of, throwError } from 'rxjs';
 import { MaterialsModule } from 'src/app/_modules/materials/materials.module';
 import { TestErrorsComponent } from './test-errors.component';
 
@@ -10,11 +15,15 @@ describe('TestErrorsComponent', () => {
   let component: TestErrorsComponent;
   let fixture: ComponentFixture<TestErrorsComponent>;
   let loader: HarnessLoader;
-
+  let httpClientSpy: jasmine.SpyObj<HttpClient> = jasmine.createSpyObj(
+    'HttpClient',
+    ['post', 'get']
+  );
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TestErrorsComponent],
-      imports: [MaterialsModule, HttpClientModule],
+      imports: [MaterialsModule],
+      providers: [{ provide: HttpClient, useValue: httpClientSpy }],
     }).compileComponents();
     fixture = TestBed.createComponent(TestErrorsComponent);
     component = fixture.componentInstance;
@@ -59,6 +68,34 @@ describe('TestErrorsComponent', () => {
     await button400.click();
 
     expect(fixture.componentInstance.getGeneric400error).toHaveBeenCalled();
+  });
+
+  it(`functions shoud log errors to the console`, async () => {
+    let errorStub = new HttpErrorResponse({ status: 400, statusText: `400 validation` });
+    httpClientSpy.post.and.returnValue(throwError(errorStub));
+    spyOn(console, `log`);
+    await component.getValidation400error();
+    expect(console.log).toHaveBeenCalledWith(errorStub);
+
+    errorStub = new HttpErrorResponse({ status: 400, statusText: `400 generic` });
+    httpClientSpy.get.and.returnValue(throwError(errorStub));
+    await component.getGeneric400error();
+    expect(console.log).toHaveBeenCalledWith(errorStub);
+
+    errorStub = new HttpErrorResponse({ status: 401, statusText: `401` });
+    httpClientSpy.get.and.returnValue(throwError(errorStub));
+    await component.get401error();
+    expect(console.log).toHaveBeenCalledWith(errorStub);
+
+    errorStub = new HttpErrorResponse({ status: 404, statusText: `404` });
+    httpClientSpy.get.and.returnValue(throwError(errorStub));
+    await component.get404error();
+    expect(console.log).toHaveBeenCalledWith(errorStub);
+
+    errorStub = new HttpErrorResponse({ status: 500, statusText: `500` });
+    httpClientSpy.get.and.returnValue(throwError(errorStub));
+    await component.get500error();
+    expect(console.log).toHaveBeenCalledWith(errorStub);
   });
 
   it(`400 validation button should call the getValidation400error`, async () => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -21,7 +21,7 @@ export class DeleteAccountDialogComponent implements OnInit {
 
   deleteAccount(): void {
     this.authService.delete().subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigateByUrl('/');
         this.snackbar.open('Account have been deleted', '', {
           duration: 2000,
@@ -29,8 +29,7 @@ export class DeleteAccountDialogComponent implements OnInit {
           verticalPosition: 'bottom',
         });
         this.dialog.close();
-      },
-      error: (error) => {},
+      }
     });
   }
 }

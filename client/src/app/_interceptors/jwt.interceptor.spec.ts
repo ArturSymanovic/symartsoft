@@ -7,11 +7,9 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ReplaySubject } from 'rxjs';
 import { User } from '../_models/user';
-import { MaterialsModule } from '../_modules/materials/materials.module';
 import { AuthService } from '../_services/auth.service';
 import { JwtInterceptor } from './jwt.interceptor';
 

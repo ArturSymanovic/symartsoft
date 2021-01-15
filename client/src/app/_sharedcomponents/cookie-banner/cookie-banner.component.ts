@@ -19,10 +19,4 @@ export class CookieBannerComponent implements OnInit {
     this.cookieService.setCookieConsent(true);
     this._bottomSheetRef.dismiss();
   }
-
-  manage(): void {
-    this.cookieService.setCookieConsent(false);
-    this.cookieService.deleteAll();
-    this._bottomSheetRef.dismiss();
-  }
 }
