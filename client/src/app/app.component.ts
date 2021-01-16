@@ -1,7 +1,5 @@
-import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationEnd, Router } from '@angular/router';
 import { User } from './_models/user';
 import { AuthService } from './_services/auth.service';
@@ -26,10 +24,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (this.cookieService.getCookieConsent() === true) {
-          gtag('js', new Date());
-          gtag('config', 'G-GZK6SGX0XG', {
-            page_path: event.urlAfterRedirects,
-          });
+          this.enableAnalytics(event);
         } else {
           this.cookieService.deleteAll();
         }
@@ -48,7 +43,14 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user') as string);
+    const user: User | null = JSON.parse(localStorage.getItem('user') as string);
     this.authService.setCurrentUser(user);
+  }
+
+  enableAnalytics(event: NavigationEnd){
+    gtag('js', new Date());
+    gtag('config', 'G-GZK6SGX0XG', {
+      page_path: event.urlAfterRedirects,
+    });
   }
 }
