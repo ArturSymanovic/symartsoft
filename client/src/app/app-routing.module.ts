@@ -6,6 +6,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeComponent } from './home/home.component';
+import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
 import { AnonGuard } from './_guards/anon.guard';
@@ -17,6 +18,7 @@ import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'layout-test', component: LayoutTestComponent },
   { path: 'blog', component: BlogComponent },
   {
     path: 'signin',

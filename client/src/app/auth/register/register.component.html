@@ -1,7 +1,7 @@
 <div class="flex-container main-site-background">
-  <form [formGroup]="registerForm">
+  <form [formGroup]="registerForm" [ngClass]="this.formCssClass">
     <h1 style="text-align: center">Register</h1>
-    <mat-form-field class="form-field" appearance="fill" color="primary">
+    <mat-form-field [ngClass]="this.formFieldCssClass" appearance="fill" color="primary">
       <mat-label>Email</mat-label>
       <input type="email" matInput formControlName="email" autocomplete="off" />
       <mat-error
@@ -16,7 +16,7 @@
         Email is required
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="form-field" appearance="fill" color="primary">
+    <mat-form-field [ngClass]="this.formFieldCssClass" appearance="fill" color="primary">
       <mat-label>Password</mat-label>
       <input type="password" matInput formControlName="password" />
       <mat-error *ngIf="registerForm.controls.password.hasError('required')">
@@ -45,13 +45,13 @@
       Register
     </button>
     <div *ngIf="validationErrors.length > 0">
-      <mat-error *ngFor="let error of validationErrors" class="error-summary">{{
+      <mat-error *ngFor="let error of validationErrors" [ngClass]="this.errorSummaryCssClass">{{
         error
       }}</mat-error>
       
     </div>
-    <hr>
-    <p class="privacy-notice">
+    
+    <p [ngClass]="this.privacyStatementCssClass">
       By signing up you agree for your data to be used as described in our
       <a routerLink="/privacy-statement">Privacy Statement</a>.
     </p>

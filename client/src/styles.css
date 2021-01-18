@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: Catamaran, "Helvetica Neue", sans-serif;
-  background-color: rgb(242, 242, 242);
+  background-color:  rgba(230, 230, 250, 1);
 }
 
 .content-container {

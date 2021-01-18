@@ -24,6 +24,7 @@ import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.componen
 import { AccountSettingsComponent } from './auth/account-settings/account-settings.component';
 import { DeleteAccountDialogComponent } from './auth/delete-account-dialog/delete-account-dialog.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { LayoutTestComponent } from './layout-test/layout-test.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     ManagePrivacyComponent,
     AccountSettingsComponent,
     DeleteAccountDialogComponent,
+    LayoutTestComponent,
   ],
   imports: [
     BrowserModule,
