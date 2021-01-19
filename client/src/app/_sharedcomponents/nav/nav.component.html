@@ -1,23 +1,58 @@
 <mat-toolbar class="main-navbar mat-elevation-z4 main-site-background">
-  <a mat-button routerLink="/" class="nav-link">
+  <div class="mobile-menu" *ngIf="showMobileMenu">
+    <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="nav-link">
+      <mat-icon class="nav-icon">menu</mat-icon>
+    </button>
+    <mat-menu #mobileMenu="matMenu">
+      <a routerLink="/" class="color-primary menu-item-link" mat-menu-item>
+        <mat-icon color="primary" class="menu-item-icon">home</mat-icon>
+        <span class="menu-item-text">HOME</span>
+      </a>
+      <mat-divider></mat-divider>
+      <a routerLink="/blog" class="color-primary menu-item-link" mat-menu-item>
+        <mat-icon color="primary" class="menu-item-icon">article</mat-icon>
+        <span class="menu-item-text">BLOG</span>
+      </a>
+      <mat-divider
+        *ngIf="(authService.currentUser$ | async) === null"
+      ></mat-divider>
+      <a
+        routerLink="/signin"
+        class="color-primary menu-item-link"
+        *ngIf="(authService.currentUser$ | async) === null"
+        mat-menu-item
+      >
+        <mat-icon color="primary" class="menu-item-icon"
+          >account_circle</mat-icon
+        >
+        <span class="menu-item-text">SIGN IN</span>
+      </a>
+    </mat-menu>
+  </div>
+
+  <a mat-button routerLink="/" class="nav-link" *ngIf="!showMobileMenu">
     <mat-icon class="nav-icon">home</mat-icon>
     <span class="mat-title title"> {{ title }}</span>
   </a>
-  <a mat-button routerLink="/blog" routerLinkActive="active" class="nav-link">
+  <a
+    mat-button
+    routerLink="/blog"
+    routerLinkActive="active"
+    class="nav-link"
+    *ngIf="!showMobileMenu"
+  >
     BLOG
   </a>
   <span class="spacer"></span>
   <a
     mat-button
     routerLink="/signin"
-    *ngIf="(authService.currentUser$ | async) === null"
+    *ngIf="(authService.currentUser$ | async) === null && !showMobileMenu"
     class="nav-link"
   >
     SIGN IN
   </a>
-  <!-- <a mat-button routerLink="/test-errors">
-    TEST ERRORS
-  </a> -->
+
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
