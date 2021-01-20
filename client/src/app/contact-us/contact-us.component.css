@@ -1,0 +1,26 @@
+.headline-section {
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+  }
+  
+  .headline-text {
+    font-size: 28px;
+    line-height: 36px;
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+
+  a {
+      color: lightgray;
+      text-decoration: none;
+      text-transform: lowercase;
+  }
+
+  a:hover {
+      color: white;
+  }
+  

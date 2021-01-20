@@ -26,6 +26,7 @@ import { DeleteAccountDialogComponent } from './auth/delete-account-dialog/delet
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { FooterComponent } from './_sharedcomponents/footer/footer.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FooterComponent } from './_sharedcomponents/footer/footer.component';
     DeleteAccountDialogComponent,
     LayoutTestComponent,
     FooterComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,

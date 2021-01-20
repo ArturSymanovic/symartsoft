@@ -5,6 +5,7 @@ import { AccountSettingsComponent } from './auth/account-settings/account-settin
 import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { BlogComponent } from './blog/blog.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'layout-test', component: LayoutTestComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'contact', component: ContactUsComponent },
   {
     path: 'signin',
     component: SigninComponent,
