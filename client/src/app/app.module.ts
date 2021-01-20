@@ -27,6 +27,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { FooterComponent } from './_sharedcomponents/footer/footer.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     LayoutTestComponent,
     FooterComponent,
     ContactUsComponent,
+    SitemapComponent,
   ],
   imports: [
     BrowserModule,
