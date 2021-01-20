@@ -17,7 +17,6 @@ import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
   { path: 'layout-test', component: LayoutTestComponent },
   { path: 'blog', component: BlogComponent },
   {

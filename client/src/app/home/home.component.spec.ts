@@ -24,17 +24,6 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the link to ABOUT', () => {
-    let hrefs = fixture.debugElement
-      .queryAll(By.css('a'))
-      .map((l) => l.nativeElement.getAttribute('routerLink'));
-    expect(
-      hrefs.findIndex((l) => {
-        return l == '/about';
-      })
-    ).not.toEqual(-1);
-  });
-
   it('should render the link to BLOG', () => {
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))

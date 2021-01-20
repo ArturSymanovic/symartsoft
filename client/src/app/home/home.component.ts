@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {}
+
+  scroll() {
+    (document.getElementsByClassName(
+      `text-container`
+    )[0] as HTMLElement).scrollIntoView();
+  }
 }
