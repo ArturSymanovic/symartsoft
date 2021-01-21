@@ -1,3 +1,62 @@
-<div class="content-container">
-  <p class="mat-title">Content comming soon</p>
+<div class="filter main-site-background-plain">
+  <button
+    mat-icon-button
+    class="prev"
+    color="accent"
+    (click)="scrollLeft()"
+    [disabled]="!showLeftButton"
+  >
+    <mat-icon class="prev-icon">keyboard_arrow_left</mat-icon>
+  </button>
+  <div class="overflow-container" #overflowContainer>
+    <mat-chip-list
+      class="chip-list"
+      [selectable]="selectable"
+      [multiple]="true"
+    >
+      <mat-chip
+        color="accent"
+        *ngFor="let chip of chips"
+        [selected]="chip.selected"
+        [ngClass]="chip.class"
+        (click)="chip.selected = !chip.selected"
+        >{{ chip.name }}</mat-chip
+      >
+    </mat-chip-list>
+  </div>
+  <button
+    mat-icon-button
+    class="next"
+    color="accent"
+    (click)="scrollRight()"
+    [disabled]="!showRightButton"
+  >
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
 </div>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>
+<p class="mat-title" style="padding-top: 30px">Content comming soon</p>

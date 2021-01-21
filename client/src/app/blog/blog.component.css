@@ -1,0 +1,133 @@
+.content-container {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+  flex-wrap: nowrap !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.filter {
+  margin-top: 56px;
+  padding-top:2px;
+  padding-bottom:2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+}
+
+.mat-chip-list {
+  display: inline;
+}
+
+.mat-chip {
+  white-space: nowrap;
+}
+
+.mat-chip:hover {
+  cursor: pointer;
+}
+
+.overflow-container {
+  flex-basis: 1200px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.prev-icon {
+  z-index: 1;
+}
+
+.prev {
+  position: relative !important;
+  z-index: 1;
+}
+
+.next {
+  z-index: 1;
+  position: relative !important;
+}
+
+.prev::before {
+  content: "";
+  background-image: linear-gradient(
+    to left,
+    rgba(11, 39, 60, 1) 30%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 20px;
+  height: 43px;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.prev::after {
+  content: "";
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 39, 60, 1) 60%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 40px;
+  height: 43px;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.next::before {
+  content: "";
+  background-image: linear-gradient(
+    to left,
+    rgba(11, 39, 60, 1) 60%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 40px;
+  height: 43px;
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.next::after {
+  content: "";
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 39, 60, 1) 30%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 20px;
+  height: 43px;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.first-chip {
+  margin-left: 10px !important;
+}
+
+.last-chip {
+  margin-right: 100px !important;
+}
