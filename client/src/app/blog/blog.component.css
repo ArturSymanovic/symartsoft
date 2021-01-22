@@ -22,6 +22,7 @@
   left: 0px;
   top: 0px;
   width: 100%;
+  z-index: 10000;
 }
 
 .mat-chip-list {
@@ -130,4 +131,78 @@
 
 .last-chip {
   margin-right: 100px !important;
+}
+
+.blog-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.blog-cards-container {
+  margin-top: 132px;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.centered {
+  align-self: center;
+}
+
+.blog-card {
+  max-width: 300px;
+  margin: 32px;
+  padding-top: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .blog-card {
+    max-width: 300px;
+    margin: 10px;
+  }
+}
+
+.blog-card-header-image {
+  width: calc(100% + 32px) !important;
+  margin-left: -16px;
+  margin-right: -16px;
+  height: 150px;
+  background-size: cover;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.blog-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.blog-title {
+  padding: 10px;
+  font-size: 19px;
+}
+
+.card-button {
+  margin-left: 8px;
+}
+
+.mat-card-content {
+  margin-bottom: 8px;
+}
+
+.mat-card-actions {
+  margin-bottom: 8px;
+}
+
+::ng-deep .mat-card-header-text {
+  margin-left: 0px !important;
+}
+
+.mat-card {
+  padding-bottom: 0px;
 }

@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCardModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -52,7 +54,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDialogModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCardModule
   ],
 })
 export class MaterialsModule {}
