@@ -11,7 +11,7 @@ import { BlogComponent } from './blog/blog.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialsModule } from './_modules/materials/materials.module';
 import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors.component';
@@ -58,6 +58,7 @@ import { SitemapComponent } from './sitemap/sitemap.component';
     ReactiveFormsModule,
     HttpClientModule,
     MaterialsModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

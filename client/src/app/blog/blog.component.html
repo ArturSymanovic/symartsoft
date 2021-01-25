@@ -1,6 +1,14 @@
 <div class="filter main-site-background-plain">
   <button
     mat-icon-button
+    color="accent"
+    (click)="drawer.toggle(); this.showResults()"
+    class="search-button"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+  <button
+    mat-icon-button
     class="prev"
     color="accent"
     (click)="scrollLeft()"
@@ -34,240 +42,62 @@
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
 </div>
-<div class="blog-cards">
-  <div class="blog-cards-container">
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
+<mat-drawer-container class="main-container" hasBackdrop="true">
+  <mat-drawer #drawer mode="over" autoFocus="false" class="search-drawer">
+    <div class="search-drawer-header" >
+      <button mat-icon-button (click)="drawer.close()" color="accent">
+        <mat-icon>search_off</mat-icon>
+      </button>
+    </div>
+    <mat-form-field class="search-form-field">
+      <mat-label>Search criteria</mat-label>
+      <input matInput type="text" autocomplete="off" (keyup)="showResults()" [(ngModel)]="searchCriteria">
+      <button mat-button matSuffix mat-icon-button (click)="clearSearchCriteria()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="mat-title">Results</div>
+    <div *ngIf="searchResults.length>0; else noResults">
+      <div *ngFor="let blogpost of searchResults">
+        <div class="search-result">
+          <h4 class="search-result-header">{{blogpost.title}}</h4>
+          <p>{{blogpost.summary}} <a [routerLink]="blogpost.routerLink">Read</a></p>       
+        </div>       
+        <hr>
       </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
+    </div>
+    <ng-template #noResults class="mat-body-1">No blogposts match your criteria</ng-template>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="blog-cards">
+      <div class="blog-cards-container">
+        <mat-card class="blog-card" *ngFor="let blogpost of blogPosts">
+          <div class="main-site-background-plain blog-card-header-image">
+            <div class="blog-title">
+              {{blogpost.title}}
+            </div>
+          </div>
+          <mat-card-content>
+            <p>
+              {{blogpost.summary}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-flat-button color="accent" class="card-button">
+              <mat-icon class="menu-item-icon">local_library</mat-icon>
+              READ
+            </button>
+            <button mat-flat-button color="primary" class="card-button">
+              <mat-icon class="menu-item-icon">share</mat-icon>
+              SHARE
+            </button>
+          </mat-card-actions>
+          <mat-card-header class="blog-header">
+            <mat-card-subtitle>Tags: {{blogpost.tags.join(', ')}}</mat-card-subtitle>
+            <mat-card-subtitle>Date: {{blogpost.date | date}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
       </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-
-
-    <mat-card class="blog-card">
-      <div class="main-site-background-plain blog-card-header-image">
-        <div class="blog-title">
-          How to deploy ASP.NET 5 WEB API project to Azure
-        </div>
-      </div>
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz
-          breeds of dog from Japan. A small, agile dog that copes very well with
-          mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-flat-button color="accent" class="card-button">
-          <mat-icon class="menu-item-icon">local_library</mat-icon>
-          READ
-        </button>
-        <button mat-flat-button color="primary" class="card-button">
-          <mat-icon class="menu-item-icon">share</mat-icon>
-          SHARE
-        </button>
-      </mat-card-actions>
-      <mat-card-header class="blog-header">
-        <mat-card-subtitle>Tags: DevOps, WebApi</mat-card-subtitle>
-        <mat-card-subtitle>Date: January 1, 2021</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-  </div>
-</div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
