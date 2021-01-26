@@ -246,3 +246,21 @@
 .search-result-header {
   margin-bottom: 8px;
 }
+
+.no-filtered-blogposts {
+  height: calc(100vh - 239px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-results-message{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-transform: uppercase;
+}
+
+.reset-filters-btn {
+  margin-left: 20px;
+}

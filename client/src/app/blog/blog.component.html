@@ -24,11 +24,11 @@
     >
       <mat-chip
         color="accent"
-        *ngFor="let chip of chips"
-        [selected]="chip.selected"
-        [ngClass]="chip.class"
-        (click)="chip.selected = !chip.selected"
-        >{{ chip.name }}</mat-chip
+        *ngFor="let tag of tags"
+        [selected]="tag.selected"
+        [ngClass]="tag.class"
+        (click)="tagSelected(tag)"
+        >{{ tag.name }}</mat-chip
       >
     </mat-chip-list>
   </div>
@@ -44,42 +44,68 @@
 </div>
 <mat-drawer-container class="main-container" hasBackdrop="true">
   <mat-drawer #drawer mode="over" autoFocus="false" class="search-drawer">
-    <div class="search-drawer-header" >
+    <div class="search-drawer-header">
       <button mat-icon-button (click)="drawer.close()" color="accent">
         <mat-icon>search_off</mat-icon>
       </button>
     </div>
     <mat-form-field class="search-form-field">
       <mat-label>Search criteria</mat-label>
-      <input matInput type="text" autocomplete="off" (keyup)="showResults()" [(ngModel)]="searchCriteria">
-      <button mat-button matSuffix mat-icon-button (click)="clearSearchCriteria()">
+      <input
+        matInput
+        type="text"
+        autocomplete="off"
+        (keyup)="showResults()"
+        [(ngModel)]="searchCriteria"
+      />
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        (click)="clearSearchCriteria()"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
     <div class="mat-title">Results</div>
-    <div *ngIf="searchResults.length>0; else noResults">
+    <div *ngIf="searchResults.length > 0; else noSearchResults">
       <div *ngFor="let blogpost of searchResults">
         <div class="search-result">
-          <h4 class="search-result-header">{{blogpost.title}}</h4>
-          <p>{{blogpost.summary}} <a [routerLink]="blogpost.routerLink">Read</a></p>       
-        </div>       
-        <hr>
+          <h4 class="search-result-header">{{ blogpost.title }}</h4>
+          <p>
+            {{ blogpost.summary }}
+            <a [routerLink]="blogpost.routerLink">Read</a>
+          </p>
+        </div>
+        <hr />
       </div>
     </div>
-    <ng-template #noResults class="mat-body-1">No blogposts match your criteria</ng-template>
+    <ng-template #noSearchResults class="mat-body-1"
+      >No blogposts match your criteria</ng-template
+    >
   </mat-drawer>
   <mat-drawer-content>
+    <div *ngIf="filteredBlogPosts.length === 0" class="no-filtered-blogposts">
+      <div>
+        <p class="mat-title no-results-message">
+          Currently there are no blogposts with selected tags!
+        </p>
+        <button class="reset-filters-btn" mat-raised-button color="accent" (click)="resetFilters()">
+          RESET FILTERS
+        </button>
+      </div>
+    </div>
     <div class="blog-cards">
       <div class="blog-cards-container">
-        <mat-card class="blog-card" *ngFor="let blogpost of blogPosts">
+        <mat-card class="blog-card" *ngFor="let blogpost of filteredBlogPosts">
           <div class="main-site-background-plain blog-card-header-image">
             <div class="blog-title">
-              {{blogpost.title}}
+              {{ blogpost.title }}
             </div>
           </div>
           <mat-card-content>
             <p>
-              {{blogpost.summary}}
+              {{ blogpost.summary }}
             </p>
           </mat-card-content>
           <mat-card-actions>
@@ -93,8 +119,12 @@
             </button>
           </mat-card-actions>
           <mat-card-header class="blog-header">
-            <mat-card-subtitle>Tags: {{blogpost.tags.join(', ')}}</mat-card-subtitle>
-            <mat-card-subtitle>Date: {{blogpost.date | date}}</mat-card-subtitle>
+            <mat-card-subtitle
+              >Tags: {{ blogpost.tags.join(", ") }}</mat-card-subtitle
+            >
+            <mat-card-subtitle
+              >Date: {{ blogpost.date | date }}</mat-card-subtitle
+            >
           </mat-card-header>
         </mat-card>
       </div>

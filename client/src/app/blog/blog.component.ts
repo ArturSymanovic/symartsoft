@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlogTag } from '../_models/blog-tag';
 import { BlogPost } from '../_models/blog-post';
+import { filter } from 'rxjs/operators';
+import { BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-blog',
@@ -13,7 +15,7 @@ export class BlogComponent implements OnInit {
   showRightButton = true;
   selectable = true;
   multiple = true;
-  chips: BlogTag[] = [
+  tags: BlogTag[] = [
     { name: `All`, selected: true, class: `first-chip` },
     { name: `Azure`, selected: false, class: `` },
     { name: `ASP.NET 5 Web API`, selected: false, class: `` },
@@ -86,15 +88,17 @@ export class BlogComponent implements OnInit {
       tags: [`Azure`, `SSL`],
     },
   ];
+  filteredBlogPosts: BlogPost[] = [];
   searchCriteria = ``;
   searchResults: BlogPost[] = [];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.filterByTags();
+  }
 
   scrollLeft() {
     const current = this.overflowContainer.nativeElement.scrollLeft;
-    console.log(current);
     this.overflowContainer.nativeElement.scroll({
       left: this.overflowContainer.nativeElement.scrollLeft - 150,
       behavior: 'smooth',
@@ -104,13 +108,11 @@ export class BlogComponent implements OnInit {
         this.showLeftButton = false;
       }
       this.showRightButton = true;
-      console.log(this.overflowContainer.nativeElement.scrollLeft);
     }, 250);
   }
 
   scrollRight() {
     const current = this.overflowContainer.nativeElement.scrollLeft;
-    console.log(current);
     this.overflowContainer.nativeElement.scroll({
       left: this.overflowContainer.nativeElement.scrollLeft + 150,
       behavior: 'smooth',
@@ -120,12 +122,9 @@ export class BlogComponent implements OnInit {
         this.showRightButton = false;
       }
       this.showLeftButton = true;
-      console.log(this.overflowContainer.nativeElement.scrollLeft);
     }, 250);
   }
-  chipClicked(index: number) {
-    this.chips[index].selected = !this.chips[index].selected;
-  }
+
   isOverflow(clientWidth: number, scrollWidth: number): boolean {
     return scrollWidth > clientWidth;
   }
@@ -139,15 +138,76 @@ export class BlogComponent implements OnInit {
           blogPost.title.includes(this.searchCriteria) ||
           blogPost.summary.includes(this.searchCriteria) ||
           blogPost.tags.find((tag) => {
-            return tag.includes(this.searchCriteria)
+            return tag.includes(this.searchCriteria);
           })
         );
-      });;
+      });
     }
   }
 
   clearSearchCriteria() {
     this.searchCriteria = ``;
     this.showResults();
+  }
+
+  tagSelected(tag: BlogTag) {
+    if (tag.name === 'All') {
+      if (tag.selected) {
+        return;
+      } else {
+        this.tags.forEach((t) => {
+          t.selected = false;
+        });
+        tag.selected = true;
+      }
+    } else {
+      tag.selected = !tag.selected;
+      if (!this.tags.find((t) => t.selected)) {
+        this.resetFilters();
+      } else {
+        const allTag = this.tags.find((t) => t.name === `All`);
+        if (allTag) {
+          allTag.selected = false;
+        }
+      }
+    }
+    this.filterByTags();
+  }
+
+  filterByTags() {
+    const allTag = this.tags.find((t) => t.name === `All`);
+    if (allTag?.selected) {
+      this.filteredBlogPosts = this.blogPosts;
+      return;
+    }
+    this.filteredBlogPosts = this.blogPosts.filter((blogPost) => {     
+      const selectedTags = this.tags.filter((t) => t.selected).map((t)=>{
+        return t.name;
+      });
+      console.log(`selected tags:`, selectedTags);
+      for (let i = 0; i < selectedTags.length; i++) {
+        const tag = selectedTags[i];
+        if (blogPost.tags.includes(tag)) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  resetFilters() {
+    this.tags.forEach((tag)=>{
+      tag.selected = false;
+    })
+    const allTag = this.tags.find((t) => t.name === `All`);
+    if (allTag) {
+      allTag.selected = true;
+    }
+    this.overflowContainer.nativeElement.scroll({
+      left: 0,
+      behavior: 'smooth',
+    });
+    this.showLeftButton = false;
+    this.filterByTags();
   }
 }
