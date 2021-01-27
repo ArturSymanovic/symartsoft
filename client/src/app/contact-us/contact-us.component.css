@@ -2,16 +2,16 @@
     background-position: center;
     background-size: cover;
     height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   
   .headline-text {
-    font-size: 28px;
-    line-height: 36px;
-    position: absolute;
-    top: 49%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     color: white;
+    padding: 10px;
   }
 
   a {

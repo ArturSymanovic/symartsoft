@@ -64,8 +64,10 @@ describe('NavComponent', () => {
     ).not.toEqual(-1);
   });
 
-  it(`should render the link to sign in if there is no current user`, () => {
+  it(`should render the link to sign in if there is no current user`, async () => {
     fixture.componentInstance.authService.setCurrentUser(null);
+    const menuHarness = await loader.getHarness(MatMenuHarness);
+    await menuHarness.open();
     fixture.detectChanges();
     let hrefs = fixture.debugElement
       .queryAll(By.css('a'))
