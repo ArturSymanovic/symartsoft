@@ -20,8 +20,7 @@ module.exports = function (config) {
       reporters: [
         { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' }
-      ],
-      fixWebpackSourcePaths: true
+      ]
     },
 
     client: {
@@ -35,13 +34,9 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml', 'coverage'],
     port: 9876,
     colors: true,
-    concurrency: 1,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless', 'ChromeHeadlessMobile'],
-    browserDisconnectTimeout: 20000,
-    browserDisconnectTolerance: 5,
-    browserNoActivityTimeout: 60000,
     customLaunchers: {     
         'ChromeHeadless': {
           base: 'Chrome',
@@ -50,7 +45,6 @@ module.exports = function (config) {
             '--headless',
             '--disable-gpu',
             '--remote-debugging-port=9222',
-            '--window-size=1920,1080'
           ]
         },  
         'ChromeHeadlessMobile': {

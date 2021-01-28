@@ -1,9 +1,9 @@
-import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 @Component({
   selector: 'app-signin',
@@ -60,7 +60,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   login() {
     this.authService.login(this.signInForm.value).subscribe({
-      next: (response) => {
+      next: () => {
         this.router.navigateByUrl(this.returnUrl);
         this.snackbar.open('Logged In', '', {
           duration: 2000,

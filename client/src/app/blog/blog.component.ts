@@ -1,6 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BlogTag } from '../_models/blog-tag';
 import { BlogPost } from '../_models/blog-post';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatDrawer } from '@angular/material/sidenav';
+import { MatChipList } from '@angular/material/chips';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-blog',
@@ -8,7 +12,10 @@ import { BlogPost } from '../_models/blog-post';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  @ViewChild('overflowContainer') overflowContainer: any;
+  @ViewChild('overflowContainer') overflowContainer: ElementRef;
+  @ViewChild('chipList') chipList: MatChipList
+  @ViewChild('drawer') drawer: MatDrawer
+  searchForm: FormGroup = new FormGroup({});
   showLeftButton = false;
   showRightButton = true;
   selectable = true;
@@ -87,11 +94,15 @@ export class BlogComponent implements OnInit {
     },
   ];
   filteredBlogPosts: BlogPost[] = [];
-  searchCriteria = ``;
   searchResults: BlogPost[] = [];
-  constructor() {}
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      searchCriteria: new FormControl('')
+    });
     this.filterByTags();
   }
 
@@ -127,15 +138,15 @@ export class BlogComponent implements OnInit {
   }
 
   showResults() {
-    if (!this.searchCriteria || this.searchCriteria?.length < 3) {
+    if (!this.searchForm.controls.searchCriteria.value || this.searchForm.controls.searchCriteria.value?.length < 3) {
       this.searchResults = [];
     } else {
       this.searchResults = this.blogPosts.filter((blogPost) => {
         return (
-          blogPost.title.includes(this.searchCriteria) ||
-          blogPost.summary.includes(this.searchCriteria) ||
+          blogPost.title.includes(this.searchForm.controls.searchCriteria.value) ||
+          blogPost.summary.includes(this.searchForm.controls.searchCriteria.value) ||
           blogPost.tags.find((tag) => {
-            return tag.includes(this.searchCriteria);
+            return tag.includes(this.searchForm.controls.searchCriteria.value);
           })
         );
       });
@@ -143,7 +154,7 @@ export class BlogComponent implements OnInit {
   }
 
   clearSearchCriteria() {
-    this.searchCriteria = ``;
+    this.searchForm.controls.searchCriteria.setValue(``);
     this.showResults();
   }
 

@@ -21,7 +21,8 @@ RUN npm install -g @angular/cli
 COPY . /app
 
 # run tests
-RUN ng test --watch=false
+RUN ng test --browsers "ChromeHeadless" --watch=false 
+RUN ng test --browsers "ChromeHeadlessMobile" --watch=false
 RUN ng e2e --port 4202
 
 # build app

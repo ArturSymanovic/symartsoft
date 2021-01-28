@@ -1,7 +1,7 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { BlogTag } from '../_models/blog-tag';
 import { MaterialsModule } from '../_modules/materials/materials.module';
@@ -15,7 +15,7 @@ describe('BlogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [BlogComponent],
-      imports: [MaterialsModule, FormsModule],
+      imports: [MaterialsModule, FormsModule, ReactiveFormsModule],
     }).compileComponents();
     fixture = TestBed.createComponent(BlogComponent);
     component = fixture.componentInstance;
