@@ -3,7 +3,6 @@ import { CookiesService } from './cookies.service';
 
 const year1970 = new Date(1970, 1, 1).toUTCString();
 const year2050 = new Date(2050, 1, 1).toUTCString();
-const year2100 = new Date(2050, 1, 1).toUTCString();
 
 // Be aware of possibility for cookies to persist between different tests
 describe('CookiesService', () => {

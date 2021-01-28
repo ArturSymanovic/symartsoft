@@ -27,7 +27,7 @@ RUN ng e2e --port 4202
 # build app
 RUN ng build --prod --output-path=dist
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim-amd64 AS build
 WORKDIR /app
 
 # copy sln and csproj files into the image

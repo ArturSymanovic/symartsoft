@@ -9,10 +9,4 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  scroll() {
-    (document.getElementsByClassName(
-      `text-container`
-    )[0] as HTMLElement).scrollIntoView();
-  }
 }
