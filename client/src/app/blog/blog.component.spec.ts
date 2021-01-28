@@ -33,4 +33,11 @@ describe('BlogComponent', () => {
     );
     expect(searchButton.length).toBeGreaterThan(0);
   });
+
+  it('should render search button', async () => {
+    const searchButton = await loader.getAllHarnesses(
+      MatButtonHarness.with({ text: `search` })
+    );
+    expect(searchButton.length).toBeGreaterThan(0);
+  });
 });

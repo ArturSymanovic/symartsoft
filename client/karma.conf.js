@@ -38,6 +38,9 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless', 'ChromeHeadlessMobile'],
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 60000,
     customLaunchers: {     
         'ChromeHeadless': {
           base: 'Chrome',
@@ -57,7 +60,7 @@ module.exports = function (config) {
             '--disable-gpu',
             '--remote-debugging-port=9223',
             '--window-size=360,740'
-          ]
+          ],
         },     
     },
     singleRun: false,
