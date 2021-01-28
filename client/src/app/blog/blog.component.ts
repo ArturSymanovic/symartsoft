@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlogTag } from '../_models/blog-tag';
 import { BlogPost } from '../_models/blog-post';
-import { filter } from 'rxjs/operators';
-import { BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-blog',
@@ -98,7 +96,6 @@ export class BlogComponent implements OnInit {
   }
 
   scrollLeft() {
-    const current = this.overflowContainer.nativeElement.scrollLeft;
     this.overflowContainer.nativeElement.scroll({
       left: this.overflowContainer.nativeElement.scrollLeft - 150,
       behavior: 'smooth',
