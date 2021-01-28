@@ -35,11 +35,12 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml', 'coverage'],
     port: 9876,
     colors: true,
+    concurrency: 1,
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless', 'ChromeHeadlessMobile'],
-    browserDisconnectTimeout: 10000,
-    browserDisconnectTolerance: 3,
+    browserDisconnectTimeout: 20000,
+    browserDisconnectTolerance: 5,
     browserNoActivityTimeout: 60000,
     customLaunchers: {     
         'ChromeHeadless': {
