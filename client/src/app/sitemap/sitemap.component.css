@@ -1,0 +1,19 @@
+.content-container {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.mat-headline {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.mat-subheading-1 {
+    flex-basis: 100%;
+}
+
+a {padding: 5px;}

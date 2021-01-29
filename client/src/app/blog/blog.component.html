@@ -1,3 +1,157 @@
-<div class="content-container">
-  <p class="mat-title">Content comming soon</p>
+<div class="filter main-site-background-plain">
+  <button
+    mat-icon-button
+    color="accent"
+    (click)="searchClicked()"
+    class="search-button"
+  >
+    <mat-icon *ngIf="!this.drawer.opened; else closeSearchIcon"
+      >search</mat-icon
+    >
+    <ng-template #closeSearchIcon>
+      <mat-icon>search_off</mat-icon>
+    </ng-template>
+  </button>
+  <button
+    mat-icon-button
+    class="prev"
+    color="accent"
+    (click)="scrollLeft()"
+    [disabled]="!showLeftButton"
+  >
+    <mat-icon class="prev-icon">keyboard_arrow_left</mat-icon>
+  </button>
+  <div class="overflow-container" #overflowContainer>
+    <mat-chip-list
+      #chipList
+      class="chip-list"
+      selectable="true"
+      multiple="true"
+    >
+      <mat-chip
+        color="accent"
+        *ngFor="let tag of tags"
+        [selected]="tag.selected"
+        [ngClass]="tag.class"
+        (click)="tagSelected(tag)"
+        >{{ tag.name }}</mat-chip
+      >
+    </mat-chip-list>
+  </div>
+  <button
+    mat-icon-button
+    class="next"
+    color="accent"
+    (click)="scrollRight()"
+    [disabled]="!showRightButton"
+  >
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
 </div>
+<form [formGroup]="searchForm">
+  <mat-drawer-container class="main-container" hasBackdrop="true">
+    <mat-drawer #drawer mode="over" autoFocus="false" class="search-drawer">
+      <mat-form-field class="search-form-field">
+        <mat-label>Search criteria (minimum 3 characters)</mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="off"
+          (keyup)="showSearchResults()"
+          formControlName="searchCriteria"
+        />
+        <button
+          type="button"
+          mat-button
+          matSuffix
+          mat-icon-button
+          (click)="clearSearchCriteria()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="mat-title">Results</div>
+      <div *ngIf="searchResults.length > 0; else noSearchResults">
+        <div *ngFor="let blogpost of searchResults">
+          <div class="search-result">
+            <h4 class="search-result-header">{{ blogpost.title }}</h4>
+            <p>
+              {{ blogpost.summary }}
+              <a [routerLink]="blogpost.routerLink">Read</a>
+            </p>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <ng-template #noSearchResults class="mat-body-1"
+        >No blogposts match your criteria</ng-template
+      >
+    </mat-drawer>
+    <mat-drawer-content>
+      <div *ngIf="filteredBlogPosts.length === 0" class="no-filtered-blogposts">
+        <div>
+          <p class="mat-title no-results-message">
+            Currently there are no blogposts with selected tags!
+          </p>
+          <button
+            class="reset-filters-btn"
+            mat-raised-button
+            color="accent"
+            (click)="resetFilters()"
+          >
+            RESET FILTERS
+          </button>
+        </div>
+      </div>
+      <div class="blog-cards">
+        <div class="blog-cards-container">
+          <mat-card
+            class="blog-card"
+            *ngFor="let blogpost of filteredBlogPosts"
+          >
+            <div class="main-site-background-plain blog-card-header-image">
+              <div class="blog-title">
+                {{ blogpost.title }}
+              </div>
+            </div>
+            <mat-card-content>
+              <p>
+                {{ blogpost.summary }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <a
+                mat-flat-button
+                color="accent"
+                class="card-button"
+                [routerLink]="blogpost.routerLink"
+              >
+                <mat-icon class="menu-item-icon">local_library</mat-icon>
+                READ
+              </a>
+              <button
+                mat-flat-button
+                color="primary"
+                class="card-button"
+                #shareTooltip="matTooltip"
+                matTooltip="Under Development"
+                matTooltipPosition="below"
+              >
+                <mat-icon class="menu-item-icon">share</mat-icon>
+                SHARE
+              </button>
+            </mat-card-actions>
+            <mat-card-header class="blog-header">
+              <mat-card-subtitle
+                >Tags: {{ blogpost.tags.join(", ") }}</mat-card-subtitle
+              >
+              <mat-card-subtitle
+                >Date: {{ blogpost.date | date }}</mat-card-subtitle
+              >
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</form>

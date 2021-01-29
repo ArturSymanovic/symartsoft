@@ -1,2 +1,11 @@
 <app-nav class="sticky"></app-nav>
-<router-outlet class="router-outlet"></router-outlet>
+<div *ngIf="this.showProgressSpinner; else appContent" class="spinner-div">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate"
+  ></mat-progress-spinner>
+</div>
+<ng-template #appContent>
+  <router-outlet class="router-outlet"></router-outlet>
+</ng-template>
+<app-footer></app-footer>

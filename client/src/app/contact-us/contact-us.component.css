@@ -1,0 +1,26 @@
+.headline-section {
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .headline-text {
+    color: white;
+    padding: 10px;
+  }
+
+  a {
+      color: lightgray;
+      text-decoration: none;
+      text-transform: lowercase;
+  }
+
+  a:hover {
+      color: white;
+  }
+  

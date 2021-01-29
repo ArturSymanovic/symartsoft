@@ -1,0 +1,266 @@
+.content-container {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+  flex-wrap: nowrap !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.filter {
+  margin-top: 56px;
+  padding-top:2px;
+  padding-bottom:2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 10000;
+}
+
+.mat-chip-list {
+  display: inline;
+}
+
+.mat-chip {
+  white-space: nowrap;
+}
+
+.mat-chip:hover {
+  cursor: pointer;
+}
+
+.overflow-container {
+  flex-basis: 1200px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.prev-icon {
+  z-index: 1;
+}
+
+.prev {
+  position: relative !important;
+  z-index: 1;
+}
+
+.next {
+  z-index: 1;
+  position: relative !important;
+}
+
+.prev::before {
+  content: "";
+  background-image: linear-gradient(
+    to left,
+    rgba(11, 39, 60, 1) 30%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 20px;
+  height: 43px;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.prev::after {
+  content: "";
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 39, 60, 1) 60%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 40px;
+  height: 43px;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.next::before {
+  content: "";
+  background-image: linear-gradient(
+    to left,
+    rgba(11, 39, 60, 1) 60%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 40px;
+  height: 43px;
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.next::after {
+  content: "";
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 39, 60, 1) 30%,
+    rgba(11, 39, 60, 0) 80%
+  );
+  width: 20px;
+  height: 43px;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.first-chip {
+  margin-left: 10px !important;
+}
+
+.last-chip {
+  margin-right: 100px !important;
+}
+
+.blog-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.blog-cards-container {
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.centered {
+  align-self: center;
+}
+
+.blog-card {
+  max-width: 300px;
+  margin: 32px;
+  padding-top: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .blog-card {
+    max-width: 300px;
+    margin: 10px;
+  }
+}
+
+.blog-card-header-image {
+  width: calc(100% + 32px) !important;
+  margin-left: -16px;
+  margin-right: -16px;
+  height: 150px;
+  background-size: cover;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.blog-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.blog-title {
+  padding: 10px;
+  font-size: 19px;
+}
+
+.card-button {
+  margin-left: 8px;
+}
+
+.mat-card-content {
+  margin-bottom: 8px;
+}
+
+.mat-card-actions {
+  margin-bottom: 8px;
+}
+
+::ng-deep .mat-card-header-text {
+  margin-left: 0px !important;
+}
+
+.mat-card {
+  padding-bottom: 0px;
+}
+
+.main-container {
+  margin-top: 100px;
+}
+
+.search-button {
+  align-self: left;
+}
+
+.mat-button-disabled {
+  color: darkgray !important;
+}
+
+.search-drawer {
+  width: 90%;
+  max-width: 500px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  display: flex;
+}
+
+.search-drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items:center;
+}
+
+
+.search-form-field {
+  width: 100%;
+}
+
+.search-result {
+  margin-top: 20px;
+}
+
+.search-result-header {
+  margin-bottom: 8px;
+}
+
+.no-filtered-blogposts {
+  height: calc(100vh - 239px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-results-message{
+  padding-left: 20px;
+  padding-right: 20px;
+  text-transform: uppercase;
+}
+
+.reset-filters-btn {
+  margin-left: 20px;
+}

@@ -3,20 +3,32 @@
   padding-bottom: 5px;
 }
 
+.form-field-small {
+  width: 45%;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
 .flex-container {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(../../../assets/background.min.svg);
   background-position: center;
   background-size: cover;
 }
 
-form {
+.form {
   background-color: rgba(230, 230, 250, 1);
   padding: 2%;
   margin: 5%;
+}
+
+.form-small {
+  background-color: rgba(230, 230, 250, 1);
+  padding: 2%;
+  margin-top: 50px;
+
 }
 
 .error-summary {

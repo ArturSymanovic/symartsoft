@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
 import { AccountSettingsComponent } from './auth/account-settings/account-settings.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { BlogComponent } from './blog/blog.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
+import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
+import { SitemapComponent } from './sitemap/sitemap.component';
 import { AnonGuard } from './_guards/anon.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { NotFoundComponent } from './_sharedcomponents/not-found/not-found.component';
@@ -16,8 +18,10 @@ import { TestErrorsComponent } from './_sharedcomponents/test-errors/test-errors
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
+  { path: 'layout-test', component: LayoutTestComponent },
+  { path: 'sitemap', component: SitemapComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'contact', component: ContactUsComponent },
   {
     path: 'signin',
     component: SigninComponent,
@@ -41,7 +45,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     runGuardsAndResolvers: 'always',
   },
-  { path: '**', component: HomeComponent, pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -49,6 +53,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       relativeLinkResolution: 'legacy',
       onSameUrlNavigation: 'reload',
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
     }),
   ],
   exports: [RouterModule],

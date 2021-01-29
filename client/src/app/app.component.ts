@@ -1,8 +1,7 @@
-import { JsonpClientBackend } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { User } from './_models/user';
 import { AuthService } from './_services/auth.service';
 import { CookiesService } from './_services/cookies.service';
@@ -17,6 +16,7 @@ declare let gtag: Function;
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  showProgressSpinner: boolean = true;
   constructor(
     public router: Router,
     public authService: AuthService,
@@ -24,18 +24,23 @@ export class AppComponent implements OnInit {
     private _bottomSheet: MatBottomSheet
   ) {
     this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.showProgressSpinner = true;
+      }
+      if (event instanceof NavigationCancel || event instanceof NavigationError){
+        this.showProgressSpinner = false;
+      }
       if (event instanceof NavigationEnd) {
+        this.showProgressSpinner = false;       
         if (this.cookieService.getCookieConsent() === true) {
-          gtag('js', new Date());
-          gtag('config', 'G-GZK6SGX0XG', {
-            page_path: event.urlAfterRedirects,
-          });
+          this.enableAnalytics(event);
         } else {
           this.cookieService.deleteAll();
         }
       }
     });
   }
+
   ngOnInit(): void {
     this.setCurrentUser();
     if (this.cookieService.getCookieConsent() === null) {
@@ -48,7 +53,16 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: User = JSON.parse(localStorage.getItem('user') as string);
+    const user: User | null = JSON.parse(
+      localStorage.getItem('user') as string
+    );
     this.authService.setCurrentUser(user);
+  }
+
+  enableAnalytics(event: NavigationEnd) {
+    gtag('js', new Date());
+    gtag('config', 'G-GZK6SGX0XG', {
+      page_path: event.urlAfterRedirects,
+    });
   }
 }

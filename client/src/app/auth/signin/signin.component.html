@@ -1,7 +1,7 @@
-<div class="flex-container">
-  <form [formGroup]="signInForm">
+<div class="flex-container main-site-background">
+  <form [formGroup]="signInForm" [ngClass]="this.formCssClass">
     <h1 style="text-align: center">Sign In</h1>
-    <mat-form-field class="form-field" appearance="fill" color="primary">
+    <mat-form-field [ngClass]="this.formFieldCssClass" appearance="fill" color="primary">
       <mat-label>Email</mat-label>
       <input type="email" matInput formControlName="email" autocomplete="off" />
       <mat-error
@@ -16,7 +16,7 @@
         Email is required
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="form-field" appearance="fill" color="primary">
+    <mat-form-field [ngClass]="this.formFieldCssClass" appearance="fill" color="primary">
       <mat-label>Password</mat-label>
       <input type="password" matInput formControlName="password" />
       <mat-error *ngIf="signInForm.controls.password.hasError('required')">

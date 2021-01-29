@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -9,14 +11,41 @@ import { AuthService } from 'src/app/_services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup = new FormGroup({});
   validationErrors: string[] = [];
+  subscriptionToLayout: Subscription;
+  formFieldCssClass: string = `form-field`;
+  formCssClass: string = `form`;
+  errorSummaryCssClass: string = `error-summary`;
+  privacyStatementCssClass: string = `privacy-notice`;
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackbar: MatSnackBar
-  ) {}
+    private snackbar: MatSnackBar,
+    private breakPointObserver: BreakpointObserver
+  ) {
+    this.subscriptionToLayout = this.breakPointObserver.observe([
+      Breakpoints.HandsetLandscape
+    ]).subscribe({
+      next: (state) =>{
+        if (state.matches) {
+          this.formFieldCssClass=`form-field-small`;
+          this.formCssClass=`form-small`;
+          this.errorSummaryCssClass=`error-summary-small`;
+          this.privacyStatementCssClass=`privacy-notice-small`;
+        } else {
+          this.formFieldCssClass=`form-field`;
+          this.formCssClass=`form`;
+          this.errorSummaryCssClass=`error-summary`;
+          this.privacyStatementCssClass=`privacy-notice`;
+        }
+      }
+    })
+  }
+  ngOnDestroy(): void {
+    this.subscriptionToLayout.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -26,7 +55,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
-      //privacyAgreement: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
