@@ -4,7 +4,6 @@ import { BlogPost } from '../_models/blog-post';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatChipList } from '@angular/material/chips';
-import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-blog',
@@ -13,12 +12,11 @@ import { ElementSchemaRegistry } from '@angular/compiler';
 })
 export class BlogComponent implements OnInit {
   @ViewChild('overflowContainer') overflowContainer: ElementRef;
-  @ViewChild('chipList') chipList: MatChipList
-  @ViewChild('drawer') drawer: MatDrawer
+  @ViewChild('chipList') chipList: MatChipList;
+  @ViewChild('drawer') drawer: MatDrawer;
   searchForm: FormGroup = new FormGroup({});
   showLeftButton = false;
   showRightButton = true;
-  selectable = true;
   multiple = true;
   tags: BlogTag[] = [
     { name: `All`, selected: true, class: `first-chip` },
@@ -95,13 +93,11 @@ export class BlogComponent implements OnInit {
   ];
   filteredBlogPosts: BlogPost[] = [];
   searchResults: BlogPost[] = [];
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
-      searchCriteria: new FormControl('')
+      searchCriteria: new FormControl(''),
     });
     this.filterByTags();
   }
@@ -131,31 +127,6 @@ export class BlogComponent implements OnInit {
       }
       this.showLeftButton = true;
     }, 250);
-  }
-
-  isOverflow(clientWidth: number, scrollWidth: number): boolean {
-    return scrollWidth > clientWidth;
-  }
-
-  showResults() {
-    if (!this.searchForm.controls.searchCriteria.value || this.searchForm.controls.searchCriteria.value?.length < 3) {
-      this.searchResults = [];
-    } else {
-      this.searchResults = this.blogPosts.filter((blogPost) => {
-        return (
-          blogPost.title.includes(this.searchForm.controls.searchCriteria.value) ||
-          blogPost.summary.includes(this.searchForm.controls.searchCriteria.value) ||
-          blogPost.tags.find((tag) => {
-            return tag.includes(this.searchForm.controls.searchCriteria.value);
-          })
-        );
-      });
-    }
-  }
-
-  clearSearchCriteria() {
-    this.searchForm.controls.searchCriteria.setValue(``);
-    this.showResults();
   }
 
   tagSelected(tag: BlogTag) {
@@ -188,11 +159,12 @@ export class BlogComponent implements OnInit {
       this.filteredBlogPosts = this.blogPosts;
       return;
     }
-    this.filteredBlogPosts = this.blogPosts.filter((blogPost) => {     
-      const selectedTags = this.tags.filter((t) => t.selected).map((t)=>{
-        return t.name;
-      });
-      console.log(`selected tags:`, selectedTags);
+    this.filteredBlogPosts = this.blogPosts.filter((blogPost) => {
+      const selectedTags = this.tags
+        .filter((t) => t.selected)
+        .map((t) => {
+          return t.name;
+        });
       for (let i = 0; i < selectedTags.length; i++) {
         const tag = selectedTags[i];
         if (blogPost.tags.includes(tag)) {
@@ -204,9 +176,9 @@ export class BlogComponent implements OnInit {
   }
 
   resetFilters() {
-    this.tags.forEach((tag)=>{
+    this.tags.forEach((tag) => {
       tag.selected = false;
-    })
+    });
     const allTag = this.tags.find((t) => t.name === `All`);
     if (allTag) {
       allTag.selected = true;
@@ -217,5 +189,48 @@ export class BlogComponent implements OnInit {
     });
     this.showLeftButton = false;
     this.filterByTags();
+  }
+
+  searchClicked() {
+    if (!this.drawer.opened) {
+      this.showSearchResults();
+    }
+    this.drawer.toggle();
+  }
+
+  showSearchResults() {
+    if (
+      !this.searchForm.controls.searchCriteria.value ||
+      this.searchForm.controls.searchCriteria.value?.length < 3
+    ) {
+      this.searchResults = [];
+    } else {
+      this.searchResults = this.blogPosts.filter((blogPost) => {
+        return (
+          blogPost.title
+            .toLowerCase()
+            .includes(
+              this.searchForm.controls.searchCriteria.value.toLowerCase()
+            ) ||
+          blogPost.summary
+            .toLowerCase()
+            .includes(
+              this.searchForm.controls.searchCriteria.value.toLowerCase()
+            ) ||
+          blogPost.tags.find((tag) => {
+            return tag
+              .toLowerCase()
+              .includes(
+                this.searchForm.controls.searchCriteria.value.toLowerCase()
+              );
+          })
+        );
+      });
+    }
+  }
+
+  clearSearchCriteria() {
+    this.searchForm.controls.searchCriteria.setValue(``);
+    this.showSearchResults();
   }
 }

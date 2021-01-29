@@ -2,10 +2,15 @@
   <button
     mat-icon-button
     color="accent"
-    (click)="drawer.toggle(); this.showResults()"
+    (click)="searchClicked()"
     class="search-button"
   >
-    <mat-icon>search</mat-icon>
+    <mat-icon *ngIf="!this.drawer.opened; else closeSearchIcon"
+      >search</mat-icon
+    >
+    <ng-template #closeSearchIcon>
+      <mat-icon>search_off</mat-icon>
+    </ng-template>
   </button>
   <button
     mat-icon-button
@@ -20,8 +25,8 @@
     <mat-chip-list
       #chipList
       class="chip-list"
-      [selectable]="selectable"
-      [multiple]="true"
+      selectable="true"
+      multiple="true"
     >
       <mat-chip
         color="accent"
@@ -46,21 +51,17 @@
 <form [formGroup]="searchForm">
   <mat-drawer-container class="main-container" hasBackdrop="true">
     <mat-drawer #drawer mode="over" autoFocus="false" class="search-drawer">
-      <div class="search-drawer-header">
-        <button mat-icon-button (click)="drawer.close()" color="accent">
-          <mat-icon>search_off</mat-icon>
-        </button>
-      </div>
       <mat-form-field class="search-form-field">
-        <mat-label>Search criteria</mat-label>
+        <mat-label>Search criteria (minimum 3 characters)</mat-label>
         <input
           matInput
           type="text"
           autocomplete="off"
-          (keyup)="showResults()"
+          (keyup)="showSearchResults()"
           formControlName="searchCriteria"
         />
         <button
+          type="button"
           mat-button
           matSuffix
           mat-icon-button
@@ -92,14 +93,22 @@
           <p class="mat-title no-results-message">
             Currently there are no blogposts with selected tags!
           </p>
-          <button class="reset-filters-btn" mat-raised-button color="accent" (click)="resetFilters()">
+          <button
+            class="reset-filters-btn"
+            mat-raised-button
+            color="accent"
+            (click)="resetFilters()"
+          >
             RESET FILTERS
           </button>
         </div>
       </div>
       <div class="blog-cards">
         <div class="blog-cards-container">
-          <mat-card class="blog-card" *ngFor="let blogpost of filteredBlogPosts">
+          <mat-card
+            class="blog-card"
+            *ngFor="let blogpost of filteredBlogPosts"
+          >
             <div class="main-site-background-plain blog-card-header-image">
               <div class="blog-title">
                 {{ blogpost.title }}
@@ -111,11 +120,23 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-flat-button color="accent" class="card-button">
+              <a
+                mat-flat-button
+                color="accent"
+                class="card-button"
+                [routerLink]="blogpost.routerLink"
+              >
                 <mat-icon class="menu-item-icon">local_library</mat-icon>
                 READ
-              </button>
-              <button mat-flat-button color="primary" class="card-button">
+              </a>
+              <button
+                mat-flat-button
+                color="primary"
+                class="card-button"
+                #shareTooltip="matTooltip"
+                matTooltip="Under Development"
+                matTooltipPosition="below"
+              >
                 <mat-icon class="menu-item-icon">share</mat-icon>
                 SHARE
               </button>
@@ -134,4 +155,3 @@
     </mat-drawer-content>
   </mat-drawer-container>
 </form>
-

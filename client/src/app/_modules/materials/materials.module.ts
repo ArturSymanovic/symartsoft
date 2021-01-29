@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTooltipModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -58,7 +60,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatCardModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTooltipModule
   ],
 })
 export class MaterialsModule {}

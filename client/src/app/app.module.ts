@@ -28,6 +28,7 @@ import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { FooterComponent } from './_sharedcomponents/footer/footer.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -52,13 +53,13 @@ import { SitemapComponent } from './sitemap/sitemap.component';
     SitemapComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
