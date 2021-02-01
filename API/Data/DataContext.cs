@@ -43,6 +43,7 @@ namespace API.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            Console.WriteLine(env);
             string connString = "";
             if (env == "Development")
             {
@@ -52,7 +53,7 @@ namespace API.Data
             {
                 connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_prod");
             }
-            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable(connString));
+            optionsBuilder.UseSqlServer(connString);
 
             return new DataContext(optionsBuilder.Options);
         }
