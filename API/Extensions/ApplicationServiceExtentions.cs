@@ -38,11 +38,6 @@ namespace API.Extensions
                 options.UseSqlServer(connectionString);
             });
 
-            using (var serviceProvider = services.BuildServiceProvider())
-            {
-                var db = serviceProvider.GetRequiredService<DataContext>();
-                db.Database.Migrate();
-            }
             var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
              
             store.Open(OpenFlags.ReadWrite);            

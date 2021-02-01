@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -30,11 +32,10 @@ namespace API
                 connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_prod");
                 configurationFile = "appsettings.json";
             }
-
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(configurationFile)
                 .Build();
-
+ 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .WriteTo
@@ -48,9 +49,17 @@ namespace API
                     restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning)
                 .CreateLogger();
 
+            Log.Information("Starting DB migration");            
+            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+            optionsBuilder.UseSqlServer(connString);
+            var dbContext = new DataContext(optionsBuilder.Options);
+            dbContext.Database.Migrate();
+            dbContext.Dispose();
+            Log.Information("Finished DB migration");
+            
             try
             {
-                Log.Information("Application Starting Up...");
+                Log.Information("Starting application");
                 CreateHostBuilder(args).Build().Run();                
             }
             catch (Exception ex)
