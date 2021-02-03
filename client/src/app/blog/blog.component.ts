@@ -35,11 +35,11 @@ export class BlogComponent implements OnInit {
   ];
   blogPosts: BlogPost[] = [
     {
-      title: `Title placeholder for sample blogpost title1 test test  `,
-      summary: `This is placeholder for the summary1 of the sample blogpost.This is placeholder for the summary of the sample blogpost.`,
-      routerLink: `sampleurl`,
-      date: new Date(2019, 1, 15),
-      tags: [`Azure`, `Angular`, `Docker`],
+      title: `How to build a project with ASP.Net Web API and Angular`,
+      summary: `This article will guide you through step by step creation of a starting point project with ASP.NET 5 Web API as backend and Angular 11 as a frontend.`,
+      routerLink: `/how-to-build-project-with-asp-web-api-and-angular`,
+      date: new Date(2021, 1, 2),
+      tags: [`ASP.NET 5 Web API`, `Angular`],
     },
     {
       title: `Title placeholder for sample blogpost title2`,

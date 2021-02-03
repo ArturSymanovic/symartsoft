@@ -19,7 +19,7 @@
 }
 
 .form {
-  background-color: rgba(230, 230, 250, 1);
+  background-color: rgba(245, 245, 245, 0.8);
   padding: 2%;
   margin-bottom: 5%;
   margin-left: 5%;
@@ -28,7 +28,7 @@
 }
 
 .form-small {
-  background-color: rgba(230, 230, 250, 1);
+  background-color: rgba(245, 245, 245, 0.8);
   padding: 2%;
   margin-top: 60px;
 }

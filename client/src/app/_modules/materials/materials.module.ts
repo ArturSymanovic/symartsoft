@@ -20,6 +20,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -42,6 +43,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatSidenavModule,
     MatTooltipModule,
+    MatExpansionModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -61,7 +63,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatCardModule,
     MatSidenavModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
 })
 export class MaterialsModule {}
