@@ -1,30 +1,113 @@
 <div class="content-container">
   <div class="blogpost-container">
     <div class="blogpost-body">
-        <h1>
-          How to build a project with ASP.Net Web API and Angular
-        </h1>
-        <h2>Summary</h2>
-        <p>
-          This article will guide you through step by step creation of a starting
-          point project with ASP.NET 5 Web API as backend and Angular 11 as a
-          frontend.
-        </p>
-        <h2>Prerequisites</h2>
-        <p>
-          In order to follow this guide as a minimum you will need the following:
-        </p>
-        <ul>
-          <li>PC or Laptop with Windows 10 operating system</li>
-          <li>Internet Connectivity</li>
-          <li>
-            Administrator priviliges to be able to install new software on your
-            development machine
-          </li>
-        </ul>
-        <h2>Installation of necessary software</h2>
-        <app-formatted-code language="css" [code]="cssSnippet"></app-formatted-code>
-      </div>     
+      <div class="mat-display-1 text-center">
+        How to build a project with ASP.NET Web API and Angular
+      </div>
+      <h1>Summary</h1>
+      <p>
+        This article will guide you through step by step creation of a starting
+        point project with ASP.NET 5 Web API as backend and Angular 11 as a
+        frontend.
+      </p>
+      <h1>Prerequisites</h1>
+      <p>
+        In order to follow this guide as a minimum you will need the following:
+      </p>
+      <ul>
+        <li>PC or Laptop with Windows 10 operating system</li>
+        <li>.NET 5 SDK</li>
+        <li>Node.js</li>
+        <li>Angular 11</li>
+        <li>Visual Studio Code (with at least c# extension)</li>
+      </ul>
+      <h1>Step 1: Initial ASP.NET Web API project setup</h1>
+      <p>
+        First we need to pick a name for out project. Let's pick "<span
+          class="bold-text"
+          >Shopping Portal</span
+        >" and create a directory where we are going to store our project files.
+        For example: "<span class="bold-text">C:\Projects\ShoppingPortal</span
+        >". We can now open the created folder in Visual Studio Code and start
+        coding. In order to generate starter files for our ASP.NET Web API
+        project we need to open VSCode terminal (keyboard shortcut "<span
+          class="bold-text"
+          >Ctrl+Shift+'</span
+        >") and type the following command:
+      </p>
+      <app-formatted-code
+        language="bash"
+        [code]="createAPIProjectSnippet"
+      ></app-formatted-code>
+      <p>
+        The above command will create "<span class="bold-text">API</span>"
+        folder in current directory and generate initial starter files based on
+        the official Microsoft Web API project template. For simplicity, key
+        "<span class="bold-text">--no-https</span>" will configure our app to
+        use only http. Once our initial project is generated, let's open the
+        generated "<span class="bold-text">API</span>" folder using
+        <span class="bold-text">File->OpenFolder</span>. VS Code will promt us
+        whether we want to auto generate assets for build and debug and we
+        acknowledge. If for some reason prompt did not appear we can generate
+        assets manually by openning command palette ("<span class="bold-text"
+          >Ctrl+Shift+p</span
+        >") and typing "<span class="bold-text"
+          >.Net: Generate Assets for Build and Debug</span
+        >".
+      </p>
+      <p>
+        Now we can start modifying our solution. Let's delete default dummy
+        <span class="bold-text">WeatherForecastController.cs</span> and
+        <span class="bold-text">WeatherForecast.cs</span> files as we will not
+        use them. We want all of our top level API controllers to be accessible
+        via the following url pattern: "<span class="bold-text"
+          >BaseUrl/api/controllername</span
+        >" (BaseUrl for our development environment will be default
+        <span class="bold-text">http://localhost:5000</span>). For this purpose
+        we will create the
+        <span class="bold-text">ApiBaseController.cs</span> class in our
+        Controllers folder. All of our other controllers will be derived from
+        this class and inherit necessary functionality.
+      </p>
+      <app-formatted-code
+        language="csharp"
+        [code]="apiBaseSnippet"
+      ></app-formatted-code>
+      <p>
+        As you can see our base class is derived from basic MVC Controller
+        without view support since we will be using Angular for our views.
+        Additionally we have two decorators:
+        <span class="bold-text">ApiController</span> - configures controller
+        with features and behaivior targetet for Web API development; and
+        <span class="bold-text">Route("api/[controller]")</span> which will
+        achieve the desired url pattern.
+      </p>
+      <p>
+        Our next step is to create the first model for representing products of
+        our shopping portal. Let's create new folder "<span
+          class="bold-text"
+        ></span
+        >Models" and inside a file "<span class="bold-text">Product.cs</span>"
+        with our Product class:
+      </p>
+      <app-formatted-code
+        language="csharp"
+        [code]="productSnippet"
+      ></app-formatted-code>
+      <p>
+        We are now ready to create our first API. In the Controllers folder
+        let's create the
+        <span class="bold-text">ProductsController.cs</span> file which will
+        have a single HttpGet method, with route "<span class="bold-text"
+          >getall</span
+        >" for retrieving all of our products. Since our controller is derived
+        from our ApiBaseController the API will be available via
+        <span class="bold-text">http://localhost:5000/api/products/getall</span>.
+      </p>
+      <app-formatted-code
+        language="csharp"
+        [code]="productsControllerSnippet"
+      ></app-formatted-code>
+    </div>
   </div>
 </div>
-

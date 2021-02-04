@@ -35,7 +35,7 @@ export class BlogComponent implements OnInit {
   ];
   blogPosts: BlogPost[] = [
     {
-      title: `How to build a project with ASP.Net Web API and Angular`,
+      title: `How to build a project with ASP.NET Web API and Angular`,
       summary: `This article will guide you through step by step creation of a starting point project with ASP.NET 5 Web API as backend and Angular 11 as a frontend.`,
       routerLink: `/how-to-build-project-with-asp-web-api-and-angular`,
       date: new Date(2021, 1, 2),

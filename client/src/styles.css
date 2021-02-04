@@ -16,8 +16,12 @@ body {
 }
 
 .content-container {
-  margin-top: 76px;
+  margin-top: 56px;
   scroll-behavior: smooth;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 48px;
+  padding-bottom: 48px;
 }
 
 .cdk-overlay-container {
@@ -30,10 +34,6 @@ body {
   background-color: lightgray;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .main-site-background {
   background-image: var(--stripes), var(--background-plain);
 }
@@ -44,4 +44,24 @@ body {
 
 .stripes {
   background-image: var(--stripes);
+}
+
+.mat-display-1, .mat-display-2, .mat-display-3, .mat-display-4 {
+  margin-bottom: 48px !important;
+}
+
+.capitalise {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+hr {
+  margin-bottom: 16px;
+}
+
+.bold-text {
+  font-weight: 600;
 }

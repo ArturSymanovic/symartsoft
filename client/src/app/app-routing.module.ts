@@ -10,6 +10,7 @@ import { LayoutTestComponent } from './layout-test/layout-test.component';
 import { ManagePrivacyComponent } from './manage-privacy/manage-privacy.component';
 import { PrivacyStatementComponent } from './privacy-statement/privacy-statement.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
+import { TypographyComponent } from './typography/typography.component';
 import { AspAngularProjectComponent } from './_blogposts/asp-angular-project/asp-angular-project.component';
 import { AnonGuard } from './_guards/anon.guard';
 import { AuthGuard } from './_guards/auth.guard';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'how-to-build-project-with-asp-web-api-and-angular', component: AspAngularProjectComponent },
   { path: 'layout-test', component: LayoutTestComponent },
+  { path: 'typography', component: TypographyComponent },
   { path: 'sitemap', component: SitemapComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactUsComponent },
