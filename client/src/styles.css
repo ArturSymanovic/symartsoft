@@ -47,7 +47,7 @@ body {
 }
 
 .mat-display-1, .mat-display-2, .mat-display-3, .mat-display-4 {
-  margin-bottom: 48px !important;
+  margin-bottom: 32px !important;
 }
 
 .capitalise {
@@ -64,4 +64,8 @@ hr {
 
 .bold-text {
   font-weight: 600;
+}
+
+h1 {
+  padding-top: 16px;
 }
