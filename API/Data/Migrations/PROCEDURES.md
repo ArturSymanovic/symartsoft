@@ -13,7 +13,7 @@ The application uses code-first migrations using Entity Framework Core and is co
 Add the following environment variables:
 
 - ASPNETCORE_ENVIRONMENT=Development
-- ConnectionStrings__symartsoft_dev=[Development_ConnectionString]
+- ConnectionStrings__symartsoft_dev=[Development_ConnectionString] (Note: on windows pay attention to potential double underscore vs colon issue)
 
 Add the following functions to alias migration functions:
 
@@ -27,4 +27,17 @@ Add the following functions to alias migration functions:
         dotnet-ef migrations script --idempotent -o Data/Migrations/DatabaseChangesForReview.sql
     }
 
+If on Windows:
+* Add functions to Powershell profile (can be found using "$Profile" command) for adding db migrations:
+    ```sh
+    function add-migration {
+        dotnet-ef migrations add $args[0] -o Data/Migrations
+        dotnet-ef migrations script --idempotent -o Data/Migrations/DatabaseChangesForReview.sql
+    }
+
+    function remove-migration {
+        dotnet-ef migrations remove
+        dotnet-ef migrations script --idempotent -o Data/Migrations/DatabaseChangesForReview.sql
+    }
+    ``` 
 

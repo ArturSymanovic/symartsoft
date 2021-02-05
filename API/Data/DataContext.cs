@@ -1,7 +1,9 @@
+using System;
 using API.Models.Auth;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace API.Data
 {
@@ -31,6 +33,26 @@ namespace API.Data
                 .WithOne(r => r.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
+        }
+    }
+    
+    public class DataFactory : IDesignTimeDbContextFactory<DataContext>
+    {
+        public DataContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            string connString = "";
+            if (env == "Development")
+            {
+                connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_dev");
+            }                
+            if (env == "Production")
+            {
+                connString = Environment.GetEnvironmentVariable("ConnectionStrings__symartsoft_prod");
+            }
+            optionsBuilder.UseSqlServer(connString);
+            return new DataContext(optionsBuilder.Options);
         }
     }
 }

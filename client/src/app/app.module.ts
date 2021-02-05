@@ -29,6 +29,9 @@ import { FooterComponent } from './_sharedcomponents/footer/footer.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { RouterModule } from '@angular/router';
+import { AspAngularProjectComponent } from './_blogposts/asp-angular-project/asp-angular-project.component';
+import { FormattedCodeComponent } from './_sharedcomponents/formatted-code/formatted-code.component';
+import { TypographyComponent } from './typography/typography.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { RouterModule } from '@angular/router';
     FooterComponent,
     ContactUsComponent,
     SitemapComponent,
+    AspAngularProjectComponent,
+    FormattedCodeComponent,
+    TypographyComponent,
   ],
   imports: [
     AppRoutingModule,
