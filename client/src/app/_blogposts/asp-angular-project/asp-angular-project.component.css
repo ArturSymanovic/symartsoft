@@ -2,3 +2,8 @@
   margin: auto;
   max-width: 1200px;
 }
+
+img {
+  width: 100%;
+  max-width: 1200px;
+}
