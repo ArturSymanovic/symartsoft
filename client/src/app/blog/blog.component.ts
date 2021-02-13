@@ -4,7 +4,7 @@ import { BlogPost } from '../_models/blog-post';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatChipList } from '@angular/material/chips';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog',
@@ -101,7 +101,7 @@ export class BlogComponent implements OnInit {
   ];
   filteredBlogPosts: BlogPost[] = [];
   searchResults: BlogPost[] = [];
-  constructor(private titleService: Title) {}
+  constructor(private titleService: Title, private metaService: Meta) {}
 
   ngOnInit(): void {
     this.searchForm = new FormGroup({
@@ -109,6 +109,11 @@ export class BlogComponent implements OnInit {
     });
     this.filterByTags();
     this.titleService.setTitle("Blog | Symartsoft");
+    const metaDescription = `Browse, search and filter all existing Symartsoft blogposts`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
   }
 
   scrollLeft() {

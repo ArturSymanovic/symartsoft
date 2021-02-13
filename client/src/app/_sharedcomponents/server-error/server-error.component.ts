@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-server-error',
@@ -6,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./server-error.component.css'],
 })
 export class ServerErrorComponent implements OnInit {
-  constructor() {}
+  constructor(private titleService: Title, private metaService: Meta) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.titleService.setTitle(`Server Error | Symartsoft`);
+    const metaDescription = `Server Error`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
+  }
 }

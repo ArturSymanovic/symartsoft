@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -25,7 +25,8 @@ export class SigninComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private snackbar: MatSnackBar,
     private breakPointObserver: BreakpointObserver,
-    private titleService: Title
+    private titleService: Title,
+    private metaService: Meta
   ) {
     this.subscriptionToRouterParams = this.route.queryParamMap.subscribe(
       (paramMap) => (this.returnUrl = paramMap.get(`returnUrl`) || '/')
@@ -52,7 +53,11 @@ export class SigninComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeForm();
     this.titleService.setTitle(`Sign In | Symartsoft`);
-
+    const metaDescription = `Sign In with with your Symartsoft account`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
   }
 
   initializeForm(): void {
