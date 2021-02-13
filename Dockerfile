@@ -37,6 +37,8 @@ COPY API/API.csproj ./API/
 COPY API.Tests/API.Tests.csproj ./API.Tests/
 COPY --from=build-client /app/client/dist ./API/wwwroot
 
+COPY /app/API/Sitemap.txt ./API/wwwroot/
+
 # restore package dependencies for the solution	
 RUN dotnet restore
 
@@ -60,9 +62,6 @@ FROM test AS publish
 
 # set the working directory to be the web api project
 WORKDIR /app/API
-
-#Copy sitemap text file
-COPY /app/API/Sitemap.txt /app/API/wwwroot/Sitemap.txt
 
 # publish the web api project to a directory called out
 RUN dotnet publish -c Release -o out
