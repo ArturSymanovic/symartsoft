@@ -37,7 +37,7 @@ COPY API/API.csproj ./API/
 COPY API.Tests/API.Tests.csproj ./API.Tests/
 COPY --from=build-client /app/client/dist ./API/wwwroot
 
-COPY /app/API/Sitemap.txt ./API/wwwroot/
+COPY API/Sitemap.txt ./API/wwwroot/
 
 # restore package dependencies for the solution	
 RUN dotnet restore
