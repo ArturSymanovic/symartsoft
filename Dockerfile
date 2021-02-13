@@ -64,6 +64,9 @@ WORKDIR /app/API
 # publish the web api project to a directory called out
 RUN dotnet publish -c Release -o out
 
+#Copy sitemap text file to release directory
+COPY /app/API/Sitemap.txt /app/API/out/
+
 # create a new layer using the cut-down aspnet runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app
