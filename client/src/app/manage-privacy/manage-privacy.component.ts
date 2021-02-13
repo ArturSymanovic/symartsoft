@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { CookiesService } from '../_services/cookies.service';
 
 @Component({
@@ -14,11 +15,14 @@ export class ManagePrivacyComponent implements OnInit {
   constructor(
     private cookieService: CookiesService,
     private _bottomSheet: MatBottomSheet,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
+    this.titleService.setTitle(`Privacy Settings | Symartsoft`);
+
   }
 
   initializeForm(): void {

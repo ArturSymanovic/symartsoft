@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-privacy-statement',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacy-statement.component.css'],
 })
 export class PrivacyStatementComponent implements OnInit {
-  constructor() {}
+  constructor(private titleService: Title) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.titleService.setTitle(`Privacy Statement | Symartsoft`);
+  }
 }
