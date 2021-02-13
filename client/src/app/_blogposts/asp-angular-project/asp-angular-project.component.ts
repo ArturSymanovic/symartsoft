@@ -7,6 +7,8 @@ import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-docker';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-csharp';
+import { Title, Meta, MetaDefinition } from '@angular/platform-browser';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 declare var Prism: any;
 @Component({
   selector: 'app-asp-angular-project',
@@ -305,9 +307,15 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 }
   `;
 
-  constructor() { }
+  constructor(private titleService: Title, private metaService: Meta) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(`How to build a project with ASP.NET 5 Web API and Angular 11 | Symartsoft`);
+    const metaDescription = `This article will guide you through step by step creation of a starting point project with ASP.NET 5 Web API as backend and Angular 11 as a frontend`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
   }
 
 }

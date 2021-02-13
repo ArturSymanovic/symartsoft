@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -23,7 +24,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private snackbar: MatSnackBar,
-    private breakPointObserver: BreakpointObserver
+    private breakPointObserver: BreakpointObserver,
+    private titleService: Title,
+    private metaService: Meta
   ) {
     this.subscriptionToLayout = this.breakPointObserver.observe([
       Breakpoints.HandsetLandscape
@@ -49,6 +52,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.titleService.setTitle(`Register | Symartsoft`);
+    const metaDescription = `Register Symartsoft account`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
   }
 
   initializeForm(): void {

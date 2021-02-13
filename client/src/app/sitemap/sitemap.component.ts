@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sitemap',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SitemapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title, private metaService: Meta) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(`Sitemap | Symartsoft`);
+    const metaDescription = `Sitemap`;
+    this.metaService.updateTag({
+      name: `description`,
+      content: metaDescription
+    }, `name=description`);
   }
 
 }
