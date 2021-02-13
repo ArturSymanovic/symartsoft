@@ -36,8 +36,6 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: artursymanovic/symartsoft:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
       -
         name: Update release draft
         id: update_release_draft
@@ -53,7 +51,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: artursymanovic/symartsoft:${{ steps.update_release_draft.outputs.tag_name }}          
+          tags: artursymanovic/symartsoft:${{ steps.update_release_draft.outputs.tag_name }}         
   CD:
     needs: [CI]
     if: ${{ github.ref == 'refs/heads/main' }}
