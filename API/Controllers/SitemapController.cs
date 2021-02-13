@@ -8,7 +8,7 @@ namespace API.Controllers
     {
         public ActionResult Index()
         {
-            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(), "Sitemap.txt"), "text/plain");
+            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Sitemap.txt"), "text/plain");
         }
     }
 }

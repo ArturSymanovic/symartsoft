@@ -61,11 +61,11 @@ FROM test AS publish
 # set the working directory to be the web api project
 WORKDIR /app/API
 
+#Copy sitemap text file
+COPY /app/API/Sitemap.txt /app/API/wwwroot/Sitemap.txt
+
 # publish the web api project to a directory called out
 RUN dotnet publish -c Release -o out
-
-#Copy sitemap text file to release directory
-COPY /app/API/Sitemap.txt /app/API/out/Sitemap.txt
 
 # create a new layer using the cut-down aspnet runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
