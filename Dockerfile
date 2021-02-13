@@ -65,7 +65,7 @@ WORKDIR /app/API
 RUN dotnet publish -c Release -o out
 
 #Copy sitemap text file to release directory
-COPY /app/API/Sitemap.txt /app/API/out/
+COPY /app/API/Sitemap.txt /app/API/out/Sitemap.txt
 
 # create a new layer using the cut-down aspnet runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
