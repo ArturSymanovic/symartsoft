@@ -28,7 +28,7 @@ RUN ng e2e --port 4202
 # build app
 RUN ng build --prod --output-path=dist
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim-amd64 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0.100-bullseye-slim-amd64 AS build
 WORKDIR /app
 
 # copy sln and csproj files into the image
@@ -67,7 +67,7 @@ WORKDIR /app/API
 RUN dotnet publish -c Release -o out
 
 # create a new layer using the cut-down aspnet runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 
 # install nginx
